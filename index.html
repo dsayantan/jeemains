@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JEE Main &mdash; Revision</title>
+<style>
+:root{
+  --ink:#14181d; --muted:#5d6672; --rule:#d7dde5; --paper:#ffffff;
+  --wash:#f3f6fa; --wash2:#eef2f7;
+  --hi:#8c2f16; --hi-bg:#fbeae3; --md:#8a6a12; --md-bg:#faf3dc;
+  --lo:#4a5563; --lo-bg:#eef1f5;
+  --ex:#31506e; --ex-bg:#f2f6fa; --pyq:#5a3a86; --pyq-bg:#f5f1fb;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--wash);color:var(--ink);
+  font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-text-size-adjust:100%}
+a{color:var(--hi)}
+.bar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--rule);backdrop-filter:saturate(1.6) blur(6px)}
+.bar-in{max-width:960px;margin:0 auto;padding:8px 16px;display:flex;gap:8px;
+  align-items:center;flex-wrap:wrap}
+#jump{max-width:340px;flex:1 1 200px;min-width:150px;overflow:hidden;
+  text-overflow:ellipsis}
+.brand{font-weight:700;letter-spacing:.2px;margin-right:auto;white-space:nowrap}
+.brand small{font-weight:400;color:var(--muted);margin-left:8px}
+button,select{font:inherit;color:inherit;background:#fff;border:1px solid var(--rule);
+  border-radius:7px;padding:5px 11px;cursor:pointer}
+button:hover,select:hover{border-color:#aab4c2}
+button:disabled{opacity:.42;cursor:default}
+.count{color:var(--muted);font-variant-numeric:tabular-nums;font-size:14px}
+.prog{height:3px;background:var(--rule)}
+.prog>i{display:block;height:100%;background:var(--hi);width:0;transition:width .18s}
+main{max-width:960px;margin:0 auto;padding:18px 16px 80px;overflow-x:hidden}
+.slide{display:none;scroll-margin-top:96px;background:var(--paper);border:1px solid var(--rule);
+  border-radius:12px;padding:20px 22px 22px;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.slide.on{display:block;animation:in .18s ease-out}
+@keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.crumb{display:flex;gap:9px;align-items:center;flex-wrap:wrap;
+  color:var(--muted);font-size:13px;margin-bottom:3px}
+.band{font-size:11px;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:999px;border:1px solid}
+.band.HIGH{color:var(--hi);background:var(--hi-bg);border-color:var(--hi)}
+.band.MEDIUM{color:var(--md);background:var(--md-bg);border-color:var(--md)}
+.band.LOW{color:var(--lo);background:var(--lo-bg);border-color:var(--lo)}
+h1.ch{font-size:15px;margin:0 0 2px;font-weight:700;color:var(--muted)}
+.fx{font-family:"DejaVu Sans Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:17px;line-height:1.5;background:var(--wash2);border:1px solid var(--rule);
+  border-left:3px solid var(--hi);border-radius:8px;padding:11px 13px;margin:2px 0 12px;
+  overflow-wrap:anywhere}
+.slide.card h1.ch{color:var(--hi);letter-spacing:.09em;font-size:11.5px}
+h2.title{font-size:23px;line-height:1.25;margin:2px 0 10px;letter-spacing:-.01em;
+  overflow-wrap:break-word}
+.body{font-size:16.5px;line-height:1.62;overflow-wrap:break-word}
+.body i{font-style:italic}
+figure{margin:16px 0 6px;text-align:center}
+svg.fig{max-width:100%;height:auto;width:min(100%,620px)}
+figcaption{color:var(--muted);font-size:13.5px;line-height:1.45;margin-top:6px;
+  max-width:640px;margin-inline:auto;text-align:center}
+.sec{margin-top:18px;border-top:1px solid var(--rule);padding-top:12px}
+.sec>h3{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);font-weight:700}
+/* a long monospace formula cannot break, so without its own scroller the
+   table forces the whole page wider than a phone screen */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.f{width:100%;border-collapse:collapse;font-size:14.5px}
+table.f td{padding:5px 7px;vertical-align:top;border-bottom:1px solid var(--rule)}
+table.f tr:last-child td{border-bottom:0}
+table.f td.n{width:36%;color:var(--ink);background:var(--wash2)}
+table.f td.v{font-family:"DejaVu Sans Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13.6px;overflow-wrap:anywhere}
+table.f tr.hit td.n{font-weight:700;box-shadow:inset 3px 0 0 var(--hi)}
+.box{border-radius:9px;padding:11px 13px;margin-top:10px;border:1px solid var(--rule)}
+.box>.lbl{font-weight:700;font-size:14px;margin:0;
+  text-transform:uppercase;letter-spacing:.06em}
+.ex{background:var(--ex-bg);border-left:3px solid var(--ex)}
+.ex>.lbl{color:var(--ex)}
+.pyq{background:var(--pyq-bg);border-left:3px solid var(--pyq)}
+.pyq>.lbl{color:var(--pyq)}
+.q{margin:9px 0 0;font-size:15.6px;overflow-wrap:break-word}
+.src{color:var(--muted);font-size:12.5px;margin-top:3px;font-style:italic}
+ol.opts{margin:8px 0 0;padding-left:0;list-style:none;counter-reset:opt}
+ol.opts li{counter-increment:opt;position:relative;padding-left:32px;
+  margin-top:4px;font-size:15.2px;overflow-wrap:break-word}
+ol.opts li::before{content:"(" counter(opt) ")";position:absolute;left:0;
+  color:var(--muted);font-weight:700;font-size:14px}
+ol.opts li.right{font-weight:700}
+ol.opts li.right::after{content:" \2713";color:#2e7d52}
+.work{margin:8px 0 0;font-size:15px}
+.ans{margin-top:7px;font-weight:700}
+.why{margin-top:7px;font-size:14.6px;color:#333b46}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tag{font-size:11.5px;color:var(--muted);border:1px solid var(--rule);
+  border-radius:999px;padding:2px 9px;background:#fff}
+.done .title::after{content:" \2713";color:#2e7d52}
+.nav{max-width:960px;margin:14px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center}
+.nav .sp{margin-left:auto}
+kbd{font:600 11.5px/1 ui-monospace,Menlo,Consolas,monospace;border:1px solid var(--rule);
+  border-bottom-width:2px;border-radius:4px;padding:2px 5px;background:#fff;color:var(--muted)}
+.help{max-width:960px;margin:14px auto 0;padding:0 16px;color:var(--muted);font-size:13px}
+@media (max-width:640px){
+  main{padding:12px 10px 70px} .slide{padding:15px 14px 18px;border-radius:10px}
+  h2.title{font-size:20px} .body{font-size:16px} .fx{font-size:15px;padding:9px 10px}
+  table.f td.n{width:44%} .bar-in{padding:7px 10px}
+}
+@media print{
+  .bar,.nav,.help,.prog{display:none!important}
+  body{background:#fff} main{max-width:none;padding:0}
+  .slide{display:block!important;break-inside:avoid;page-break-inside:avoid;
+    border:0;border-top:1px solid var(--rule);border-radius:0;box-shadow:none;
+    padding:14px 0;animation:none}
+  .box{break-inside:avoid}
+}
+
+.hero{max-width:960px;margin:0 auto;padding:40px 16px 8px}
+.hero h1{font-size:34px;margin:0 0 6px;letter-spacing:-.02em}
+.hero p{color:var(--muted);margin:0;font-size:17px;max-width:60ch}
+.grid{max-width:960px;margin:22px auto 0;padding:0 16px;display:grid;gap:14px;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{display:block;background:#fff;border:1px solid var(--rule);border-radius:12px;
+  padding:18px 18px 16px;text-decoration:none;color:inherit;
+  box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.card:hover{border-color:#9fb0c4;box-shadow:0 3px 10px rgba(16,24,40,.08)}
+.card h3{margin:0 0 3px;font-size:21px}
+.lede{color:var(--muted);font-size:14px;margin:0 0 10px}
+.facts{margin:0 0 12px;padding-left:18px;font-size:14.5px;line-height:1.7}
+.go{color:var(--hi);font-weight:700;font-size:14.5px}
+.sect{max-width:960px;margin:30px auto 0;padding:0 16px}
+.sect h2{font-size:18px;margin:0 0 8px}
+.soon{background:#fff;border:1px dashed var(--rule);border-radius:12px;padding:18px;
+  color:var(--muted);font-size:15px}
+.note{max-width:960px;margin:26px auto 60px;padding:0 16px;color:var(--muted);font-size:13.5px}
+</style></head><body>
+<div class="hero">
+  <h1>JEE Main revision</h1>
+  <p>Concepts, formulae and worked questions for Physics, Chemistry and
+     Mathematics &mdash; ordered by what the 2022&ndash;2026 papers actually ask.</p>
+</div>
+<div class="grid">
+    <a class="card" href="physics.html">
+      <h3>Physics</h3>
+      <p class="lede">29 chapters, heaviest first</p>
+      <ul class="facts">
+        <li><b>88</b> concept slides</li>
+        <li><b>189</b> formulae, each explained on its own slide</li>
+        <li><b>54</b> worked questions from the papers</li>
+      </ul>
+      <span class="go">Open the deck &rarr;</span>
+    </a>
+    <a class="card" href="chemistry.html">
+      <h3>Chemistry</h3>
+      <p class="lede">25 chapters, heaviest first</p>
+      <ul class="facts">
+        <li><b>92</b> concept slides</li>
+        <li><b>149</b> formulae, each explained on its own slide</li>
+        <li><b>37</b> worked questions from the papers</li>
+      </ul>
+      <span class="go">Open the deck &rarr;</span>
+    </a>
+    <a class="card" href="maths.html">
+      <h3>Mathematics</h3>
+      <p class="lede">20 chapters, heaviest first</p>
+      <ul class="facts">
+        <li><b>71</b> concept slides</li>
+        <li><b>120</b> formulae, each explained on its own slide</li>
+        <li><b>38</b> worked questions from the papers</li>
+      </ul>
+      <span class="go">Open the deck &rarr;</span>
+    </a></div>
+<div class="sect">
+  <h2>Mock tests</h2>
+  <div class="soon" id="mocks">
+    Nothing here yet. Full-length papers on the JEE Main pattern will be linked
+    from this panel.
+  </div>
+</div>
+<p class="note">Chapters run heaviest first. The share against each chapter is
+  measured from every Paper&nbsp;1 shift of 2022&ndash;2026 held in this
+  collection; the band (HIGH, MEDIUM, LOW) is the reliable part of that
+  measurement, and the percentage is good to a point or two. Everything works
+  offline &mdash; there is nothing to load from the network.</p>
+</body></html>
