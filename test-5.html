@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JEE Main PYQ Paper 2</title>
+<style>
+:root{
+  --ink:#14181d; --muted:#5d6672; --rule:#d7dde5; --paper:#ffffff;
+  --wash:#f3f6fa; --wash2:#eef2f7;
+  --hi:#8c2f16; --hi-bg:#fbeae3;
+  --ok:#17633c; --ok-bg:#e7f4ec; --bad:#9c2b2b; --bad-bg:#fbeced;
+  --mark:#6b3fa0; --mark-bg:#f3edfb; --warn:#8a6a12;
+  --ex:#31506e; --ex-bg:#f2f6fa;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--wash);color:var(--ink);
+  font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-text-size-adjust:100%}
+a{color:var(--hi)}
+[hidden]{display:none!important}
+
+/* ---- top bar ---------------------------------------------------------- */
+.bar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.97);
+  border-bottom:1px solid var(--rule);backdrop-filter:saturate(1.6) blur(6px)}
+.bar-in{max-width:1120px;margin:0 auto;padding:8px 16px;display:flex;gap:10px;
+  align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;margin-right:auto;white-space:nowrap}
+.brand small{font-weight:400;color:var(--muted);margin-left:8px}
+.clock{font-variant-numeric:tabular-nums;font-weight:700;font-size:18px;
+  padding:3px 10px;border-radius:7px;background:var(--wash2);border:1px solid var(--rule)}
+.clock.low{background:var(--bad-bg);border-color:#e2b5b5;color:var(--bad)}
+.pcount{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;background:#fff;border:1px solid var(--rule);
+  border-radius:7px;padding:6px 12px;cursor:pointer}
+button:hover:not(:disabled){border-color:#aab4c2}
+button:disabled{opacity:.45;cursor:default}
+button.primary{background:var(--hi);color:#fff;border-color:var(--hi);font-weight:600}
+button.primary:hover:not(:disabled){filter:brightness(1.08)}
+
+/* ---- layout ----------------------------------------------------------- */
+main{max-width:1120px;margin:0 auto;padding:16px;overflow-x:hidden}
+.wrap{display:grid;gap:16px;grid-template-columns:minmax(0,1fr) 280px;align-items:start}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:12px;
+  padding:18px 20px 20px;box-shadow:0 1px 2px rgba(16,24,40,.05)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{border-radius:999px;padding:5px 14px;font-size:14.5px}
+.tabs button[aria-selected="true"]{background:var(--hi);color:#fff;border-color:var(--hi);font-weight:600}
+.sec{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.sec button{font-size:13.5px;padding:4px 11px}
+.sec button[aria-selected="true"]{background:var(--wash2);border-color:#aab4c2;font-weight:600}
+
+/* ---- the question ----------------------------------------------------- */
+.qhead{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
+.qno{font-weight:700;font-size:17px}
+.chip{font-size:11.5px;color:var(--muted);border:1px solid var(--rule);
+  border-radius:999px;padding:2px 9px;background:var(--wash)}
+.qbody{font-size:16.5px;margin:6px 0 2px;overflow-wrap:break-word}
+.qbody p{margin:.5em 0}
+ol.opts{list-style:none;margin:14px 0 0;padding:0;counter-reset:opt}
+ol.opts li{counter-increment:opt;margin-top:8px}
+ol.opts label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;
+  border:1px solid var(--rule);border-radius:9px;padding:9px 12px;background:#fff}
+ol.opts label:hover{border-color:#aab4c2;background:var(--wash)}
+ol.opts input{margin:4px 0 0}
+ol.opts label .n{font-weight:700;color:var(--muted);min-width:1.6em}
+.numin{margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.numin input{font:inherit;padding:8px 12px;border:1px solid var(--rule);border-radius:9px;
+  width:190px;background:#fff}
+.numin .hint{color:var(--muted);font-size:13.5px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;
+  padding-top:14px;border-top:1px solid var(--rule)}
+.acts .sp{margin-left:auto}
+
+/* ---- palette ---------------------------------------------------------- */
+.pal{position:sticky;top:64px}
+.pal h3{margin:0 0 10px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.grid button{padding:0;height:36px;border-radius:7px;font-size:14px;font-weight:600;
+  font-variant-numeric:tabular-nums}
+.grid button[data-s="na"]{background:#fff}
+.grid button[data-s="ans"]{background:var(--ok-bg);border-color:#9ccfb3;color:var(--ok)}
+.grid button[data-s="mk"]{background:var(--mark-bg);border-color:#c3aee0;color:var(--mark)}
+.grid button[data-s="amk"]{background:var(--mark-bg);border-color:#c3aee0;color:var(--mark);
+  box-shadow:inset 0 -4px 0 var(--ok)}
+.grid button[data-s="nv"]{background:var(--wash2);color:var(--muted)}
+.grid button.cur{outline:2px solid var(--hi);outline-offset:1px}
+.key{margin-top:14px;font-size:12.5px;color:var(--muted);line-height:1.9}
+.key i{display:inline-block;width:13px;height:13px;border-radius:4px;vertical-align:-2px;
+  margin-right:6px;border:1px solid var(--rule)}
+.pal .subt{margin-top:14px;font-size:13px;color:var(--muted)}
+
+/* ---- gate / instructions ---------------------------------------------- */
+.gate{max-width:820px;margin:24px auto}
+.gate h1{font-size:28px;margin:0 0 6px;letter-spacing:-.02em}
+.gate .lede{color:var(--muted);margin:0 0 16px}
+.gate ul{padding-left:20px;line-height:1.8}
+.gate .go{margin-top:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.gate label{font-size:14.5px}
+table.bp{border-collapse:collapse;width:100%;font-size:14.5px;margin:10px 0}
+table.bp th,table.bp td{border:1px solid var(--rule);padding:6px 9px;text-align:left}
+table.bp th{background:var(--wash2);font-weight:600}
+
+/* ---- result ----------------------------------------------------------- */
+.score{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  margin:4px 0 6px}
+.score .box{border:1px solid var(--rule);border-radius:11px;padding:14px 16px;background:var(--wash)}
+.score .big{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.score .lab{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.score .sub{font-size:13.5px;color:var(--muted);margin-top:3px}
+.caveat{font-size:13.5px;color:var(--muted);margin:10px 0 0}
+.rev{margin-top:18px}
+.rev .q{border:1px solid var(--rule);border-radius:11px;padding:14px 16px;margin-top:12px;
+  background:#fff}
+.rev .q.right{border-left:4px solid var(--ok)}
+.rev .q.wrong{border-left:4px solid var(--bad)}
+.rev .q.skip{border-left:4px solid var(--rule)}
+.verdict{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.right .verdict{color:var(--ok)} .wrong .verdict{color:var(--bad)} .skip .verdict{color:var(--muted)}
+.rev ol.opts li{margin-top:5px}
+.rev ol.opts .o{display:flex;gap:10px;border:1px solid var(--rule);border-radius:9px;
+  padding:7px 11px;background:#fff}
+.rev ol.opts .o.ok{background:var(--ok-bg);border-color:#9ccfb3;font-weight:600}
+.rev ol.opts .o.no{background:var(--bad-bg);border-color:#e2b5b5}
+.rev .src{color:var(--muted);font-size:12.8px;margin:4px 0 0;font-style:italic}
+.rev .sol{margin-top:11px;background:var(--ex-bg);border-left:3px solid var(--ex);
+  border-radius:9px;padding:11px 13px;font-size:15.3px}
+.rev .sol b.t{color:var(--ex);text-transform:uppercase;letter-spacing:.06em;font-size:12.5px}
+.rev .trap{margin-top:8px;color:#333b46;font-size:14.6px}
+.rev .ansline{margin-top:9px;font-weight:700}
+.tw{overflow-x:auto}
+
+@media (max-width:860px){
+  /* one column, and the QUESTION comes first.  Putting the palette on top --
+     which is what a sticky sidebar collapses to by default -- buries the
+     question under 75 buttons on a phone, so you scroll before you can read
+     anything. */
+  .wrap{grid-template-columns:minmax(0,1fr)}
+  .pal{position:static;order:2}
+  .wrap>.card:first-child{order:1}
+  .grid{grid-template-columns:repeat(10,1fr)}
+}
+@media (max-width:560px){
+  main{padding:10px} .card{padding:14px 14px 16px}
+  .grid{grid-template-columns:repeat(6,1fr)}
+  .numin input{width:100%}
+}
+@media print{
+  .bar,.pal,.acts,.tabs,.sec{display:none!important}
+  body{background:#fff} .card{border:0;box-shadow:none;padding:0}
+}
+</style>
+</head><body>
+
+<header class="bar"><div class="bar-in">
+  <span class="brand">JEE Main PYQ Paper 2<small>mock paper</small></span>
+  <span class="pcount" id="pcount"></span>
+  <span class="clock" id="clock">3:00:00</span>
+  <button class="primary" id="submitbtn">Submit</button>
+</div></header>
+
+<main>
+
+<!-- ------------------------------------------------ the instructions gate -->
+<section class="gate card" id="gate">
+  <h1>PYQ Paper 2</h1>
+  <p class="lede">A second full paper of real past questions, with no question shared with any other paper here.</p>
+
+  <h3>The paper</h3>
+  <ul>
+    <li><b>180 minutes</b>, 75 questions, <b>300 marks</b>.</li>
+    <li>Three subjects. Each has <b>Section A</b> &mdash; 20
+        multiple-choice questions with one correct option &mdash; and
+        <b>Section B</b> &mdash; 5 numerical-value questions where
+        you type a number.</li>
+    <li><b>+4</b> for a correct answer, <b>&minus;1</b> for a wrong one, 0 for
+        one left blank. Section B carries the same penalty as Section A, and
+        all five of its questions are compulsory &mdash; that is the pattern in
+        force since the 2025 session.</li>
+    <li>You may move between questions freely and change any answer until you
+        submit. Nothing is marked until then.</li>
+  </ul>
+
+  <h3>What this paper is built from</h3>
+  <p>The chapter mix is <b>measured, not guessed</b>: it follows the share each
+     chapter took of the 2025 and 2026 papers held in this collection, which is
+     the syllabus as NTA has actually examined it since the 2024 reduction.
+     Chapters NTA dropped &mdash; Communication Systems in Physics, Surface
+     Chemistry and metallurgy in Chemistry, Mathematical Reasoning in
+     Mathematics &mdash; are absent, because they are absent from the 2025 and
+     2026 papers.</p>
+  <table class="bp"><tr><th>Subject</th><th>Section A</th><th>Section B</th><th>Marks</th></tr><tr><td><b>Physics</b></td><td>20</td><td>5</td><td>100</td></tr><tr><td colspan='4' style='color:var(--muted);font-size:13.5px'>Atoms (3), Alternating Current (2), Capacitance (2), Dual Nature of Matter and Radiation (2), Ray Optics (2), Centre of Mass and Collisions, Current Electricity, Electromagnetic Induction, Electromagnetic Waves, Electrostatics, Gravitation, Kinematics, Mechanical Properties of Fluids, Moving Charges and Magnetism, Nuclei, Oscillations, Rotational Motion, Semiconductor Electronics, Units, Dimensions, Errors and Experimental Skills</td></tr><tr><td><b>Chemistry</b></td><td>20</td><td>5</td><td>100</td></tr><tr><td colspan='4' style='color:var(--muted);font-size:13.5px'>Basic Principles of Organic Chemistry (3), Biomolecules, Polymers and Everyday Chemistry (3), Coordination Compounds (3), Aldehydes, Ketones and Carboxylic Acids (2), Atomic Structure (2), Chemical Kinetics (2), Chemical Bonding and Molecular Structure, Chemical Thermodynamics, Classification of Elements and Periodicity, Electrochemistry, Equilibrium, Hydrocarbons, Practical and Analytical Chemistry, Solutions, d- and f-Block Elements, p-Block Elements</td></tr><tr><td><b>Mathematics</b></td><td>20</td><td>5</td><td>100</td></tr><tr><td colspan='4' style='color:var(--muted);font-size:13.5px'>Permutations and Combinations (3), Sequences and Series (3), Statistics (3), Vector Algebra (3), Conic Sections (2), Sets, Relations and Functions (2), Binomial Theorem, Circles, Complex Numbers and Quadratic Equations, Differential Equations, Limits, Continuity and Differentiability, Matrices and Determinants, Probability, Three Dimensional Geometry, Trigonometry and Inverse Trigonometry</td></tr></table>
+
+  <h3>Once you start</h3>
+  <ul>
+    <li>The clock starts when you press the button and <b>does not stop</b>. If
+        you close the page the clock keeps running; coming back offers you the
+        time that is left, or submits what you had.</li>
+    <li>When the time runs out the paper submits itself.</li>
+    <li>After submitting you get your score, a percentile estimate, and
+        <b>every question worked through</b> &mdash; right or wrong.</li>
+  </ul>
+
+  <div class="go">
+    <button class="primary" id="startbtn">Start the paper</button>
+    <a href="index.html">Back to all subjects</a>
+  </div>
+</section>
+
+<!-- --------------------------------------------------------- the exam ---- -->
+<section id="exam" hidden>
+ <div class="wrap">
+  <div class="card">
+    <div class="qhead">
+      <span class="qno" id="qno"></span>
+      <span class="chip" id="qsub"></span>
+      <span class="chip" id="qsec"></span>
+      <span class="chip" id="qmark"></span>
+    </div>
+    <div class="qbody" id="qbody"></div>
+    <div id="qans"></div>
+    <div class="acts">
+      <button id="prevbtn">&larr; Previous</button>
+      <button id="clearbtn">Clear</button>
+      <button id="markbtn">Mark for Review &amp; Next</button>
+      <span class="sp"></span>
+      <button class="primary" id="savebtn">Save &amp; Next &rarr;</button>
+    </div>
+  </div>
+  <aside class="card pal">
+    <h3>Questions</h3>
+    <div id="palette"></div>
+    <div class="key">
+      <div><i style="background:#e7f4ec;border-color:#9ccfb3"></i>answered</div>
+      <div><i style="background:#fff"></i>seen, not answered</div>
+      <div><i style="background:#eef2f7"></i>not visited</div>
+      <div><i style="background:#f3edfb;border-color:#c3aee0"></i>marked for review</div>
+    </div>
+  </aside>
+ </div>
+</section>
+
+<!-- -------------------------------------------------------- the result --- -->
+<section id="result" hidden>
+  <div class="card">
+    <h1 style="margin:0 0 4px;font-size:26px">Your paper</h1>
+    <div class="score" id="scorebox"></div>
+    <div id="bysub"></div>
+    <p class="caveat"><b>About the percentile.</b> It is read off the published
+      marks-against-percentile tables for JEE Main 2025, interpolated between
+      their rows, and shown as a band because the real curve moves by a few
+      hundredths between shifts. It assumes a cohort the size of 2025's. It is
+      an <i>estimate from a mock</i>, not a prediction: no mock is calibrated
+      against a real cohort, and an easy or hard shift moves everyone together.
+      Read the band, not the digits.</p>
+    <div class="go" style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+      <button id="againbtn">Clear and sit it again</button>
+      <a href="index.html">Back to all subjects</a>
+    </div>
+  </div>
+  <div class="rev card" style="margin-top:16px">
+    <h2 style="margin:0;font-size:20px">Every question, worked through</h2>
+    <div id="review"></div>
+  </div>
+</section>
+
+</main>
+<script>window.PAPER = {"name": "PYQ Paper 2", "questions": [{"sub": "Physics", "ch": "Ray Optics", "kind": "mcq", "q": "The light rays from an object have been reflected towards an observer from a standard flat mirror, the image observed by the observer are: <b>A.</b> Real <b>B.</b> Erect <b>C.</b> Smaller in size then object <b>D.</b> Laterally inverted. Choose the most appropriate answer from the options given below:", "opts": ["B and D only", "B and C only", "A and D only", "A, C and D only"], "ans": 1, "tol": 0, "sol": "A plane mirror gives a virtual, erect image the same size as the object and laterally inverted. So B and D are the true ones; A fails because the image is virtual and C because the magnification is exactly 1.", "trap": "Four properties, and the paper picks the two that hold. Learn all four together &mdash; virtual, erect, same size, laterally inverted.", "src": "JEE Main 2023-01-25, Shift 2, Q3"}, {"sub": "Physics", "ch": "Ray Optics", "kind": "mcq", "q": "Consider an equilateral prism (refractive index &radic;2). A ray of light is incident on its one surface at a certain angle i. If the emergent ray is found to graze along the other surface then the angle of refraction at the incident surface is close to ____.", "opts": ["15&deg;", "20&deg;", "40&deg;", "30&deg;"], "ans": 1, "tol": 0, "sol": "Grazing emergence means the ray leaves at 90&deg;, so it strikes the second face at exactly the critical angle: sin C = 1/&radic;2 gives C = 45&deg;. In a prism r&#8321; + r&#8322; = A, so r&#8321; = 60&deg; &minus; 45&deg;.", "trap": "The paper prints the index as &radic;2, which text extraction flattens to a bare 2. Grazing emergence always means <i>r</i>&#8322; = C &mdash; that is the whole content of the question.", "src": "JEE Main 2026-01-22, Shift 1, Q40"}, {"sub": "Physics", "ch": "Capacitance", "kind": "mcq", "q": "Given below are two statements: one is labelled as Assertion (A) and the other is labelled as Reason (R). <b>Assertion (A):</b> Net dipole moment of a polar linear isotropic dielectric substance is not zero even in the absence of an external electric field. <b>Reason (R):</b> In absence of an external electric field, the different permanent dipoles of a polar dielectric substance are oriented in random directions. In the light of the above statements, choose the most appropriate answer from the options given below:", "opts": ["(A) is correct but (R) is not correct", "Both (A) and (R) are correct but (R) is not the correct explanation of (A)", "Both (A) and (R) are correct and (R) is the correct explanation of (A)", "(A) is not correct but (R) is correct"], "ans": 4, "tol": 0, "sol": "The reason is right and it destroys the assertion. Each molecule of a polar dielectric has a permanent dipole moment, but with no field to line them up the directions are random and the vector sum over the sample is zero.", "trap": "A field does not create the dipoles in a polar dielectric &mdash; it only aligns them. In a non-polar one it creates them.", "src": "JEE Main 2025-04-02, Shift 2, Q26"}, {"sub": "Physics", "ch": "Semiconductor Electronics", "kind": "mcq", "q": "Choose the correct statement about Zener diode:", "opts": ["It works as a voltage regulator in reverse bias and behaves like simple pn junction diode in forward bias.", "It works as a voltage regulator in both forward and reverse bias.", "It works a voltage regulator only in forward bias.", "It works as a voltage regulator in forward bias and behaves like simple pn junction diode in reverse bias."], "ans": 1, "tol": 0, "sol": "A Zener is heavily doped, so its junction is thin and the field across it large. That gives a sharp, non-destructive breakdown at a defined reverse voltage, which is what holds the output steady.", "trap": "", "src": "JEE Main 2023-02-01, Shift 2, Q12"}, {"sub": "Physics", "ch": "Dual Nature of Matter and Radiation", "kind": "mcq", "q": "From the photoelectric effect experiment, following observations are made. Identify which of these are correct <b>A.</b> The stopping potential depends only on the work function of the metal. <b>B.</b> The saturation current increases as the intensity of incident light increases. <b>C.</b> The maximum kinetic energy of a photo electron depends on the intensity of the incident light. <b>D.</b> Photoelectric effect can be explained using wave theory of light. Choose the correct answer from the options given below:", "opts": ["B, C only", "A, C, D only", "B only", "A, B, D only"], "ans": 3, "tol": 0, "sol": "Only B survives. Stopping potential depends on frequency <i>and</i> work function, so A is incomplete; K<sub>max</sub> depends on frequency, not intensity, so C is wrong; and the instantaneous emission and the threshold frequency are exactly what wave theory cannot explain, so D is wrong.", "trap": "Intensity sets <i>how many</i> electrons come out, frequency sets <i>how fast</i>. Every statement here is one of those two confused with the other.", "src": "JEE Main 2023-01-24, Shift 1, Q3"}, {"sub": "Physics", "ch": "Dual Nature of Matter and Radiation", "kind": "mcq", "q": "Given below are two statements. <b>Statement I:</b> Out of microwaves, infrared rays and ultraviolet rays, ultraviolet rays are the most effective for the emission of electrons from a metallic surface. <b>Statement II:</b> Above the threshold frequency, the maximum kinetic energy of photoelectrons is inversely proportional to the frequency of the incident light. In the light of above statements, choose the correct answer from the options given below:", "opts": ["Statement I is false but statement II is true", "Both Statement I and Statement II are true", "Statement I is true but statement II is false", "Both Statement I and Statement II are false"], "ans": 3, "tol": 0, "sol": "Statement I is right &mdash; ultraviolet has the highest frequency and so the most energetic photons. Statement II inverts the relation: K<sub>max</sub> = h&nu; &minus; &phi;&#8320; rises <i>linearly</i> with frequency.", "trap": "", "src": "JEE Main 2023-04-13, Shift 2, Q42"}, {"sub": "Physics", "ch": "Electrostatics", "kind": "mcq", "q": "A uniform wire of linear charge density &lambda; is placed along y-axis. The locus of equipotential surface is", "opts": ["x&sup2; + y&sup2; + z&sup2; = constant", "x&sup2; + z&sup2; = constant", "xyz = constant", "xy + yz + zx = constant"], "ans": 2, "tol": 0, "sol": "The field of an infinite line charge points radially away from the line and depends only on the perpendicular distance. So the equipotentials are coaxial cylinders about the y-axis, and x&sup2; + z&sup2; is exactly that distance squared.", "trap": "Match the symmetry of the surface to the symmetry of the source: a point gives spheres, a line gives cylinders, a plane gives planes.", "src": "JEE Main 2025-01-28, Shift 1, Q2"}, {"sub": "Physics", "ch": "Current Electricity", "kind": "mcq", "q": "The drift velocity of electrons for a conductor connected in an electrical circuit is V<sub>d</sub>. The conductor is now replaced by another conductor with same material and same length but double the area of cross section. The applied voltage remains same. The new drift velocity of electrons will be", "opts": ["V<sub>d</sub>", "V<sub>d</sub>/2", "V<sub>d</sub>/4", "2V<sub>d</sub>"], "ans": 1, "tol": 0, "sol": "v<sub>d</sub> = eE&tau;/m = eV&tau;/(mL). Neither the area nor the current appears: with V and L unchanged the field in the wire is unchanged, so the drift velocity is too.", "trap": "The <i>current</i> doubles, because I = nAev&#8340; and A has doubled &mdash; but the drift speed itself does not.", "src": "JEE Main 2023-01-31, Shift 1, Q13"}, {"sub": "Physics", "ch": "Oscillations", "kind": "mcq", "q": "The time period of oscillation of a simple pendulum of length L suspended from the roof of a vehicle, which moves without friction down an inclined plane of inclination &alpha;, is given by:", "opts": ["2&pi;&radic;(L/(g cos&alpha;))", "2&pi;&radic;(L/(g sin&alpha;))", "2&pi;&radic;(L/g)", "2&pi;&radic;(L/(g tan&alpha;))"], "ans": 1, "tol": 0, "sol": "In the vehicle's frame the pendulum feels gravity plus a pseudo-force from the acceleration g sin&alpha; down the slope. Those two combine to an effective gravity of g cos&alpha;, perpendicular to the incline.", "trap": "'Without friction' is the key phrase: it fixes the acceleration at g sin&alpha;, which is what makes the effective gravity exactly g cos&alpha;.", "src": "JEE Main 2022-07-29, Shift 1, Q9"}, {"sub": "Physics", "ch": "Units, Dimensions, Errors and Experimental Skills", "kind": "mcq", "q": "Spherometer can't be used for measurement of:", "opts": ["Radius of curvature of convex mirror", "Radius of curvature of concave mirror", "Thickness of capacitor plates", "Specific rotation of liquid"], "ans": 4, "tol": 0, "sol": "A spherometer measures the sagitta of a curved surface and small thicknesses, so the first three are all within its reach. Specific rotation is an optical property of a solution and is measured with a polarimeter.", "trap": "Match the instrument to the <i>quantity</i>. Three options are lengths and one is not.", "src": "JEE Main 2024-01-27, Shift 1, Q26"}, {"sub": "Physics", "ch": "Gravitation", "kind": "mcq", "q": "Given below are two statements: one is labelled as Assertion A and the other is labelled as Reason R. <b>Assertion A:</b> Earth has atmosphere whereas moon doesn't have any atmosphere. <b>Reason R:</b> The escape velocity on moon is very small as compared to that on earth. In the light of the above statements, choose the correct answer from the options given below:", "opts": ["Both A and R are correct and R is the correct explanation of A", "A is false but R is true", "Both A and R are correct but R is NOT the correct explanation of A", "A is true but R is false"], "ans": 1, "tol": 0, "sol": "v&#7497; = &radic;(2gR). The Moon is both smaller and less massive, so its escape velocity is about 2.4 km/s against Earth's 11.2. Gas molecules at lunar temperatures routinely exceed that and are lost.", "trap": "", "src": "JEE Main 2023-04-06, Shift 1, Q32"}, {"sub": "Physics", "ch": "Electromagnetic Induction", "kind": "mcq", "q": "A coil is placed in magnetic field such that plane of coil is perpendicular to the direction of magnetic field. The magnetic flux through a coil can be changed: <b>A.</b> By changing the magnitude of the magnetic field within the coil. <b>B.</b> By changing the area of coil within the magnetic field. <b>C.</b> By changing the angle between the direction of magnetic field and the plane of the coil. <b>D.</b> By reversing the magnetic field direction abruptly without changing its magnitude. Choose the most appropriate answer from the options given below:", "opts": ["A and B only", "A, B and C only", "A, B and D only", "A and C only"], "ans": 2, "tol": 0, "sol": "&Phi; = BA cos&theta; has exactly three things in it, and A, B and C change one each. D reverses the sign of &Phi; and so does change it &mdash; the paper's own solution notes this, and asks for the <i>most appropriate</i> option rather than the complete one.", "trap": "Worth knowing that the printed solution concedes ABCD would also be defensible. When a paper says 'most appropriate', it is warning you that one option is a better fit rather than the only true one.", "src": "JEE Main 2023-02-01, Shift 2, Q4"}, {"sub": "Physics", "ch": "Moving Charges and Magnetism", "kind": "mcq", "q": "The number of turns of the coil of a moving coil galvanometer is increased in order to increase current sensitivity by 50%. The percentage change in voltage sensitivity of the galvanometer will be:", "opts": ["100%", "50%", "75%", "0%"], "ans": 4, "tol": 0, "sol": "Current sensitivity is NAB/k, so it is proportional to N. But the coil's resistance is also proportional to N, and voltage sensitivity is current sensitivity divided by resistance &mdash; so the N cancels.", "trap": "A favourite, because the intuitive answer 50% is wrong for a reason worth understanding: more turns means more wire.", "src": "JEE Main 2023-01-31, Shift 2, Q9"}, {"sub": "Physics", "ch": "Atoms", "kind": "mcq", "q": "In Bohr's atomic model of hydrogen, let K, P and E are the kinetic energy, potential energy and total energy of the electron respectively. Choose the correct option when the electron undergoes transitions to a higher level:", "opts": ["All K, P and E increase", "K decreases, P and E increase", "P decreases, K and E increase", "K increases, P and E decrease"], "ans": 2, "tol": 0, "sol": "In any 1/r&sup2; bound orbit K = &minus;E and P = 2E, with E = &minus;13.6Z&sup2;/n&sup2; eV. Going up in n makes E less negative, so E and P both rise; K = &minus;E therefore falls.", "trap": "The virial theorem in one line: K = &minus;E, P = 2E. The electron slows down as it moves out, which is the opposite of the usual intuition.", "src": "JEE Main 2022-06-24, Shift 2, Q1020"}, {"sub": "Physics", "ch": "Atoms", "kind": "mcq", "q": "Radius of electron in ground state for hydrogen is a&#8320;, then radius of electron in He&#8314; ion in 3rd excited state is a. Then a&#8320;/a is", "opts": ["1/2", "1/4", "1/16", "1/8"], "ans": 4, "tol": 0, "sol": "r = a&#8320;n&sup2;/Z. The third excited state is n = 4 and He&#8314; has Z = 2, so a = a&#8320;(16)/2 = 8a&#8320; and a&#8320;/a = 1/8.", "trap": "Third <i>excited</i> state is n = 4, not n = 3. That off-by-one is the single commonest error in this chapter.", "src": "JEE Main 2025-01-22, Shift 1, Q7"}, {"sub": "Physics", "ch": "Atoms", "kind": "mcq", "q": "Assuming the validity of Bohr's atomic model for hydrogen like ions, the radius of Li&#8314;&#8314; ion in its ground state is given by a&#8320;/X. The value of X is (where a&#8320; is the first Bohr's radius.)", "opts": ["2", "1/3", "3", "9"], "ans": 3, "tol": 0, "sol": "r = a&#8320;n&sup2;/Z. The ground state has n = 1 and Li&sup2;&#8314; has Z = 3, so r = a&#8320;/3 and X = 3.", "trap": "A higher nuclear charge pulls the orbit <i>in</i>, so the radius is divided by Z, not multiplied.", "src": "JEE Main 2025-04-02, Shift 2, Q36"}, {"sub": "Physics", "ch": "Electromagnetic Waves", "kind": "mcq", "q": "If &epsilon;&#8320; denotes the permittivity of free space and &phi;<sub>E</sub> is the flux of the electric field through the area bounded by the closed surface, then dimension of &epsilon;&#8320;(d&phi;<sub>E</sub>/dt) is that of", "opts": ["Electric field", "Electric potential", "Electric charge", "Electric current"], "ans": 4, "tol": 0, "sol": "This is Maxwell's displacement current itself: i<sub>d</sub> = &epsilon;&#8320; d&phi;<sub>E</sub>/dt. Dimensionally &epsilon;&#8320;&phi;<sub>E</sub> is a charge, so its time derivative is a current.", "trap": "The term exists so that Amp&egrave;re's law still works in the gap of a charging capacitor, where no conduction current flows.", "src": "JEE Main 2025-04-07, Shift 1, Q30"}, {"sub": "Physics", "ch": "Alternating Current", "kind": "mcq", "q": "A capacitor having capacitance of 100 &micro;F is charged with a potential difference of 12 V is connected to an inductor of inductance 10 mH. Find the maximum current through the inductor.", "opts": ["2 A", "16 A", "2.4 A", "1.2 A"], "ans": 4, "tol": 0, "sol": "The LC loop swaps energy: &frac12;CV&sup2; becomes &frac12;LI&sup2; at the instant the capacitor is empty. So I = V&radic;(C/L) = 12&radic;(100&times;10&#8315;&#8310;/10&times;10&#8315;&sup3;) = 12 &times; 0.1.", "trap": "No resistance, so no energy is lost &mdash; that is what lets you equate the two energies instead of solving the differential equation.", "src": "JEE Main 2024-01-29, Shift 1, Q7"}, {"sub": "Physics", "ch": "Alternating Current", "kind": "mcq", "q": "An alternating current is represented by the equation, i = 100&radic;2 sin(100&pi;t) ampere. The RMS value of current and the frequency of the given alternating current are", "opts": ["100&radic;2 A, 100 Hz", "100/&radic;2 A, 100 Hz", "100 A, 50 Hz", "50&radic;2 A, 50 Hz"], "ans": 3, "tol": 0, "sol": "Read off i&#8320; = 100&radic;2 and &omega; = 100&pi;. Then I<sub>rms</sub> = i&#8320;/&radic;2 = 100 A and f = &omega;/2&pi; = 100&pi;/2&pi; = 50 Hz.", "trap": "Two independent slips are on offer: forgetting the &radic;2, and reading &omega; as f. Options 1 and 2 catch one each.", "src": "JEE Main 2025-04-04, Shift 1, Q31"}, {"sub": "Physics", "ch": "Centre of Mass and Collisions", "kind": "mcq", "q": "As per the given figure, a small ball P slides down the quadrant of a circle and hits the other ball Q of equal mass which is initially at rest. Neglecting the effect of friction and assume the collision to be elastic, the velocity of ball Q after collision will be: (g = 10 m/s&sup2;)", "opts": ["0", "0.25 m/s", "2 m/s", "4 m/s"], "ans": 3, "tol": 0, "sol": "P reaches the bottom with v = &radic;(2gh) = &radic;(2 &times; 10 &times; 0.2) = 2 m/s &mdash; the paper's figure gives the quadrant a radius of 0.2 m. In a head-on elastic collision between equal masses the velocities are simply exchanged, so Q leaves with 2 m/s and P stops.", "trap": "Equal masses, elastic, head-on: swap the velocities. No algebra is needed once you recognise the case.", "src": "JEE Main 2023-01-30, Shift 1, Q4"}, {"sub": "Physics", "ch": "Capacitance", "kind": "num", "q": "A parallel plate capacitor with width 4 cm, length 8 cm and separation between the plates of 4 mm is connected to a battery of 20 V. A dielectric slab of dielectric constant 5 having length 1 cm, width 4 cm and thickness 4 mm is inserted between the plates of parallel plate capacitor. The electrostatic energy of this system will be ________ &epsilon;&#8320; J. (Where &epsilon;&#8320; is the permittivity of free space)", "opts": [], "ans": 240, "tol": 0, "sol": "The slab fills the full gap over 1 cm of the 8 cm length, so the two regions are capacitors in <i>parallel</i>. Air part: &epsilon;&#8320;(4&times;7&times;10&#8315;&#8308;)/(4&times;10&#8315;&sup3;) = 0.7&epsilon;&#8320;. Slab part: 5&epsilon;&#8320;(4&times;1&times;10&#8315;&#8308;)/(4&times;10&#8315;&sup3;) = 0.5&epsilon;&#8320;. So C = 1.2&epsilon;&#8320; and U = &frac12;CV&sup2; = &frac12;(1.2&epsilon;&#8320;)(400).", "trap": "A slab that spans the whole gap but only part of the area splits the capacitor in parallel; a slab that spans the whole area but only part of the gap splits it in series. Deciding which is the entire question.", "src": "JEE Main 2022-07-27, Shift 2, Q1006"}, {"sub": "Physics", "ch": "Rotational Motion", "kind": "num", "q": "A solid cylinder is released from rest from the top of an inclined plane of inclination 30&deg; and length 60 cm. If the cylinder rolls without slipping, its speed upon reaching the bottom of the inclined plane is __________ ms&#8315;&sup1;. (Given g = 10 ms&#8315;&sup2;)", "opts": [], "ans": 2, "tol": 0, "sol": "v = &radic;(2gh/(1 + k&sup2;/R&sup2;)) with k&sup2;/R&sup2; = &frac12; for a solid cylinder. The height is h = 0.60 sin30&deg; = 0.30 m, so v = &radic;(2 &times; 10 &times; 0.30 / 1.5) = &radic;4 = 2 ms&#8315;&sup1;.", "trap": "The 60 cm is measured <i>along the slope</i>; the height is that times sin30&deg;. Using 60 cm as the height gives &radic;8.", "src": "JEE Main 2023-02-01, Shift 1, Q28"}, {"sub": "Physics", "ch": "Mechanical Properties of Fluids", "kind": "num", "q": "In a hydraulic lift, the two sides have areas A&#8321; = 25 cm&sup2; and A&#8322; = 100 cm&sup2;. If a force of 100 N is applied normally on the area A&#8321;, then the force on the area A&#8322; is _______ N.", "opts": [], "ans": 400, "tol": 0, "sol": "Pascal's law: the pressure is the same throughout, so F&#8321;/A&#8321; = F&#8322;/A&#8322;. Then F&#8322; = 100 &times; (100/25) = 400 N.", "trap": "The force is multiplied by the <i>area</i> ratio, not the linear one. Work is not multiplied: the large piston moves four times less far.", "src": "JEE Main 2025-01-29, Shift 1, Q21"}, {"sub": "Physics", "ch": "Nuclei", "kind": "num", "q": "A nucleus with mass number 242 and binding energy per nucleon as 7.6 MeV breaks into two fragment each with mass number 121. If each fragment nucleus has binding energy per nucleon as 8.1 MeV, the total gain in binding energy is __________ MeV.", "opts": [], "ans": 121, "tol": 0, "sol": "Final binding energy = 2 &times; 121 &times; 8.1 = 1960.2 MeV; initial = 242 &times; 7.6 = 1839.2 MeV. The difference is the energy released.", "trap": "This is the binding-energy curve as arithmetic: moving up the curve towards iron releases exactly this difference.", "src": "JEE Main 2023-04-08, Shift 1, Q52"}, {"sub": "Physics", "ch": "Kinematics", "kind": "num", "q": "Two bodies are projected from ground with same speeds 40 ms&#8315;&sup1; at two different angles with respect to horizontal. The bodies were found to have same range. If one of the body was projected at an angle of 60&deg;, with horizontal then sum of the maximum heights, attained by the two projectiles, is _______ m. (Given g = 10 ms&#8315;&sup2;)", "opts": [], "ans": 80, "tol": 0, "sol": "Equal ranges mean the angles are &theta; and 90&deg; &minus; &theta;, so the other is 30&deg;. Then H = u&sup2;sin&sup2;&theta;/2g gives 80 &times; (3/4) = 60 m and 80 &times; (1/4) = 20 m &mdash; and their sum is u&sup2;/2g, independent of the angle.", "trap": "H&#8321; + H&#8322; = u&sup2;/2g for any complementary pair &mdash; worth remembering, since it turns the whole question into one division.", "src": "JEE Main 2023-01-31, Shift 2, Q30"}, {"sub": "Chemistry", "ch": "Equilibrium", "kind": "mcq", "q": "Given below are two statement: <b>Statement I:</b> In redox titration, the indicators used are sensitive to change in pH of the solution. <b>Statement II:</b> In acid-base titration, the indicators used are sensitive to change in oxidation potential. In the light of the above statement, choose the most appropriate answer from the options given below", "opts": ["Both statement I and Statement II are incorrect", "Statement I is incorrect but Statement II is correct", "Statement I is correct but Statement II is incorrect", "Both Statement I and Statement II are correct"], "ans": 1, "tol": 0, "sol": "The two statements have been swapped. An acid&ndash;base indicator is a weak acid whose two forms differ in colour, so it responds to pH; a redox indicator changes colour with the electrode potential of the solution.", "trap": "Read the pairing, not the words. Both sentences are individually sensible-sounding, which is the whole design of the question.", "src": "JEE Main 2023-04-08, Shift 2, Q76"}, {"sub": "Chemistry", "ch": "Coordination Compounds", "kind": "mcq", "q": "Chiral complex from the following is: Here en = ethylene diamine", "opts": ["cis &ndash; [PtCl&#8322;(en)&#8322;]&sup2;&#8314;", "trans &ndash; [PtCl&#8322;(en)&#8322;]&sup2;&#8314;", "cis &ndash; [PtCl&#8322;(NH&#8323;)&#8322;]", "trans &ndash; [Co(NH&#8323;)&#8324;Cl&#8322;]&#8314;"], "ans": 1, "tol": 0, "sol": "A complex is chiral when it has no plane of symmetry. Every <i>trans</i> octahedral isomer here has one, and square-planar cis-[PtCl&#8322;(NH&#8323;)&#8322;] is planar and so achiral. Only the cis bis-chelate, cis-[PtCl&#8322;(en)&#8322;]&sup2;&#8314;, is non-superimposable on its mirror image.", "trap": "cis-[M(AA)&#8322;X&#8322;] and [M(AA)&#8323;] are the two octahedral shapes that are reliably chiral. Trans almost never is.", "src": "JEE Main 2023-01-29, Shift 1, Q42"}, {"sub": "Chemistry", "ch": "Coordination Compounds", "kind": "mcq", "q": "Consider the following complexes (1) [Mn(CN)&#8326;]&#8308;&#8315; (2) [Fe(CN)&#8326;]&#8308;&#8315; (3) [Fe(CN)&#8326;]&sup3;&#8315; (4) [Co(CN)&#8326;]&sup3;&#8315;. Correct order of CFSE (&Delta;) will be", "opts": ["3 &gt; 4 &gt; 2 &gt; 1", "4 &gt; 3 &gt; 2 &gt; 1", "4 &gt; 3 &gt; 1 &gt; 2", "3 &gt; 4 &gt; 1 &gt; 2"], "ans": 2, "tol": 0, "sol": "The ligand is CN&#8315; throughout, so only the metal ion matters. &Delta;&#8320; rises with charge and, at equal charge, across the period: Co&sup3;&#8314; &gt; Fe&sup3;&#8314; &gt; Fe&sup2;&#8314; &gt; Mn&sup2;&#8314;.", "trap": "Hold the ligand fixed and the question is only about the metal; hold the metal fixed and it is only about the spectrochemical series.", "src": "JEE Main 2025-01-29, Shift 1, Q5"}, {"sub": "Chemistry", "ch": "Aldehydes, Ketones and Carboxylic Acids", "kind": "mcq", "q": "Two statements are given below: <b>Statement I:</b> The melting point of monocarboxylic acid with even number of carbon atoms is higher than that of with odd number of carbon atoms acid immediately below and above it in the series. <b>Statement II:</b> The solubility of monocarboxylic acids in water decreases with increase in molar mass. Choose the most appropriate option:", "opts": ["Both Statement I and Statement II are correct.", "Both Statement I and Statement II are incorrect.", "Statement I is correct but Statement II is incorrect.", "Statement I is incorrect but Statement II is correct."], "ans": 1, "tol": 0, "sol": "Both hold. Even-numbered chains pack more efficiently in the solid, so the melting points zig-zag rather than rise smoothly. And as the hydrocarbon tail grows it swamps the polar &ndash;COOH group, so water solubility drops away.", "trap": "The alternating melting point is a packing effect, not an electronic one &mdash; the same reason alkanes show it.", "src": "JEE Main 2022-06-24, Shift 1, Q14"}, {"sub": "Chemistry", "ch": "Aldehydes, Ketones and Carboxylic Acids", "kind": "mcq", "q": "Number of molecules from below which cannot give iodoform reaction is: Ethanol, Isopropyl alcohol, Bromoacetone, 2-Butanol, 2-Butanone, Butanal, 2-Pentanone, 3-Pentanone, Pentanal and 3-Pentanol", "opts": ["5", "4", "3", "2"], "ans": 2, "tol": 0, "sol": "Iodoform needs a CH&#8323;CO&ndash; group or a CH&#8323;CH(OH)&ndash; group that can be oxidised to one. Butanal, pentanal, 3-pentanone and 3-pentanol have neither &mdash; four in all. Note that 2-pentanone does give it, since it is a methyl ketone.", "trap": "The paper's own solution lists 2-pentanone among the failures, which is wrong &mdash; but its count of 4 is right because butanal, pentanal, 3-pentanone and 3-pentanol are the four. Check the rule yourself rather than the list.", "src": "JEE Main 2025-04-03, Shift 1, Q61"}, {"sub": "Chemistry", "ch": "Chemical Bonding and Molecular Structure", "kind": "mcq", "q": "The correct statement/s about Hydrogen bonding is/are: <b>A.</b> Hydrogen bonding exists when H is covalently bonded to the highly electro negative atom. <b>B.</b> Intermolecular H bonding is present in o-nitro phenol. <b>C.</b> Intramolecular H bonding is present in HF. <b>D.</b> The magnitude of H bonding depends on the physical state of the compound. <b>E.</b> H-bonding has powerful effect on the structure and properties of compounds. Choose the correct answer from the options given below:", "opts": ["A only", "A, D, E only", "A, B, D only", "A, B, C only"], "ans": 2, "tol": 0, "sol": "A, D and E are the standard statements. B is false &mdash; o-nitrophenol's bonding is <i>intra</i>molecular, which is exactly why it is the volatile isomer. C reverses the same word: HF's bonding is between molecules, and it cannot be within one, since a diatomic has nothing to reach round to.", "trap": "Two of the five statements are the words <i>inter</i> and <i>intra</i> swapped. Read that prefix first in any hydrogen-bonding question.", "src": "JEE Main 2024-04-04, Shift 2, Q64"}, {"sub": "Chemistry", "ch": "Biomolecules, Polymers and Everyday Chemistry", "kind": "mcq", "q": "Which of the following statements is incorrect for antibiotics?", "opts": ["An antibiotic must be a product of metabolism.", "An antibiotic is a synthetic substance produced as a structural analogue of naturally occurring antibiotic.", "An antibiotic should promote the growth or survival of microorganisms.", "An antibiotic should be effective in low concentrations."], "ans": 3, "tol": 0, "sol": "An antibiotic kills microorganisms or stops them multiplying &mdash; bactericidal or bacteriostatic. Promoting their growth is the opposite of what it is for.", "trap": "", "src": "JEE Main 2023-01-25, Shift 1, Q46"}, {"sub": "Chemistry", "ch": "Biomolecules, Polymers and Everyday Chemistry", "kind": "mcq", "q": "When nucleotide forms dimer the linkage present between is", "opts": ["Disulphide linkage", "Glycosidic linkage", "Phosphodiester linkage", "Peptide linkage"], "ans": 3, "tol": 0, "sol": "A nucleotide is base + sugar + phosphate. Two of them join when the phosphate on one sugar's 5&prime; carbon esterifies the 3&prime; &ndash;OH of the next &mdash; two ester bonds through one phosphate, hence <i>phospho&shy;diester</i>.", "trap": "Three linkages, three places: glycosidic joins base to sugar, phosphodiester joins nucleotide to nucleotide, peptide joins amino acids.", "src": "JEE Main 2024-01-27, Shift 1, Q27"}, {"sub": "Chemistry", "ch": "Biomolecules, Polymers and Everyday Chemistry", "kind": "mcq", "q": "&alpha;-helix protein and &beta;-pleated sheets protein belong to which one of the following types of protein?", "opts": ["Primary", "Secondary", "Tertiary", "Quarternary"], "ans": 2, "tol": 0, "sol": "Secondary structure is the regular local shape the backbone takes up through hydrogen bonding &mdash; and the &alpha;-helix and the &beta;-pleated sheet are its two forms.", "trap": "Primary is the sequence, secondary the local folding, tertiary the overall three-dimensional shape, quaternary the assembly of several chains.", "src": "JEE Main 2025-01-23, Shift 2, Q5"}, {"sub": "Chemistry", "ch": "Basic Principles of Organic Chemistry", "kind": "mcq", "q": "Which of the following nitrogen containing compound does not give Lassaigne's test?", "opts": ["Phenyl hydrazine", "Glycene", "Urea", "Hydrazine"], "ans": 4, "tol": 0, "sol": "Hydrazine is N&#8322;H&#8324; &mdash; there is no carbon in it, so sodium fusion cannot form NaCN and the nitrogen cannot be detected as Prussian blue.", "trap": "The same rule as the previous question, asked from the other end. Scan the four formulae for carbon before anything else.", "src": "JEE Main 2024-04-04, Shift 1, Q73"}, {"sub": "Chemistry", "ch": "Basic Principles of Organic Chemistry", "kind": "mcq", "q": "When 1 g of compound (X) is subjected to Kjeldahl's method for estimation of nitrogen, 15 mL, 1M H&#8322;SO&#8324; was neutralized by ammonia evolved. The percentage of nitrogen in compound (X) is:", "opts": ["21", "0.42", "42", "0.21"], "ans": 3, "tol": 0, "sol": "H&#8322;SO&#8324; is dibasic, so 15 mL of 1 M is 30 millimoles of acid equivalents and therefore 30 millimoles of NH&#8323;, i.e. 30 mmol of nitrogen. Mass of N = 0.030 &times; 14 = 0.42 g, which in 1 g of sample is 42%.", "trap": "The factor of two for the dibasic acid is the whole question &mdash; drop it and you get 21, which is option 1.", "src": "JEE Main 2026-01-22, Shift 2, Q56"}, {"sub": "Chemistry", "ch": "Chemical Thermodynamics", "kind": "mcq", "q": "Identify the extensive and intensive property?", "opts": ["Mass, volume, conductivity &ndash; Intensive property", "Mass, temperature, heat, volume &ndash; Extensive property", "Mass, volume, internal energy &ndash; Extensive property", "Density, temperature, moles, internal energy &ndash; Intensive property"], "ans": 3, "tol": 0, "sol": "An extensive property scales with how much substance there is; an intensive one does not. Mass, volume and internal energy all double if you double the sample; density, temperature and conductivity do not, and moles is extensive.", "trap": "A quick test: divide the sample in two. Whatever halves is extensive.", "src": "JEE Main 2025-01-22, Shift 2, Q12"}, {"sub": "Chemistry", "ch": "Chemical Kinetics", "kind": "mcq", "q": "Consider the following statements related to temperature dependence of rate constants. Identify the correct statements, <b>A.</b> The Arrhenius equation holds true only for an elementary homogenous reaction. <b>B.</b> The unit of A is same as that of k in Arrhenius equation. <b>C.</b> At a given temperature, a low activation energy means a fast reaction. <b>D.</b> A and E<sub>a</sub> as used in Arrhenius equation depend on temperature. <b>E.</b> When E<sub>a</sub> &gt;&gt; RT, A and E<sub>a</sub> become interdependent. Choose the correct answer from the options given below:", "opts": ["A, C and D Only", "B, D and E Only", "B and C Only", "A and B Only"], "ans": 3, "tol": 0, "sol": "B is right because k = Ae<sup>&minus;Ea/RT</sup> and the exponential is dimensionless. C is right because a smaller E<sub>a</sub> makes that exponential larger. A is wrong &mdash; the equation is used for complex reactions too &mdash; and D is wrong, which is exactly why a plot of ln k against 1/T is a straight line.", "trap": "If A and E<sub>a</sub> varied with temperature the Arrhenius plot would not be linear, and the whole method of measuring E<sub>a</sub> from a slope would collapse.", "src": "JEE Main 2025-04-03, Shift 2, Q70"}, {"sub": "Chemistry", "ch": "Electrochemistry", "kind": "mcq", "q": "In the industrial production of which of the following, molecular hydrogen is obtained as a byproduct?", "opts": ["NaOH", "NaCl", "Na metal", "Na&#8322;CO&#8323;"], "ans": 1, "tol": 0, "sol": "The chlor-alkali process electrolyses brine. At the anode chloride is oxidised to Cl&#8322;; at the cathode it is <i>water</i> that is reduced, not Na&#8314;, giving H&#8322; and leaving OH&#8315; behind &mdash; so the three products are NaOH, Cl&#8322; and H&#8322;.", "trap": "Sodium metal is <i>not</i> made this way: it needs molten NaCl, because in water the reduction of water always wins over the reduction of Na&#8314;.", "src": "JEE Main 2022-06-24, Shift 2, Q8"}, {"sub": "Chemistry", "ch": "Atomic Structure", "kind": "mcq", "q": "The extra stability of half-filled subshell is due to <b>A.</b> Symmetrical distribution of electrons <b>B.</b> Smaller coulombic repulsion energy <b>C.</b> The presence of electrons with the same spin in non-degenerate orbitals <b>D.</b> Larger exchange energy <b>E.</b> Relatively smaller shielding of electrons by one another. Identify the correct statements", "opts": ["(B), (D) and (E) only", "(A), (B), (D) and (E) only", "(B), (C) and (D) only", "(A), (B) and (D) only"], "ans": 2, "tol": 0, "sol": "All of A, B, D and E are standard reasons. C is the one that is wrong: the parallel-spin electrons of a half-filled subshell sit in <i>degenerate</i> orbitals, which is what Hund's rule is about.", "trap": "Exchange energy is the dominant term and the one usually left out of a first answer. It is why Cr is 3d&#8309;4s&sup1; and not 3d&#8308;4s&sup2;.", "src": "JEE Main 2025-04-07, Shift 2, Q67"}, {"sub": "Chemistry", "ch": "Classification of Elements and Periodicity", "kind": "mcq", "q": "The difference in melting point and boiling point of oxygen and sulphur can be explained by", "opts": ["Electronegativity", "Electron gain enthalpy", "Atomicity", "Ionisation energy"], "ans": 3, "tol": 0, "sol": "Oxygen exists as small O&#8322; molecules held together only by weak dispersion forces; sulphur exists as S&#8328; rings, which are far larger and so attract one another much more strongly.", "trap": "A reminder that physical properties often turn on the molecule, not the atom &mdash; the periodic trend in electronegativity is a red herring here.", "src": "JEE Main 2025-01-24, Shift 1, Q2"}, {"sub": "Chemistry", "ch": "Solutions", "kind": "mcq", "q": "In the depression of freezing point experiment <b>A.</b> Vapour pressure of the solution is less than that of pure solvent <b>B.</b> Vapour pressure of the solution is more than that of pure solvent <b>C.</b> Only solute molecules solidify at the freezing point <b>D.</b> Only solvent molecules solidify at the freezing point", "opts": ["A and D only", "B and C only", "A and C only", "A only"], "ans": 1, "tol": 0, "sol": "A non-volatile solute lowers the vapour pressure, so A is right and B wrong. And it is the pure solvent that crystallises out &mdash; which is <i>why</i> the freezing point falls, since the solid must reach the same lowered vapour pressure as the solution.", "trap": "The whole of &Delta;T&#7584; follows from the vapour-pressure curves meeting at a lower temperature. Statement D is the physical reason, not a separate fact.", "src": "JEE Main 2023-01-24, Shift 1, Q49"}, {"sub": "Chemistry", "ch": "d- and f-Block Elements", "kind": "mcq", "q": "Which of the following elements have half-filled f-orbitals in their ground state? (Given: atomic number Sm = 62; Eu = 63; Tb = 65; Gd = 64; Pm = 61) <b>A.</b> Sm <b>B.</b> Eu <b>C.</b> Tb <b>D.</b> Gd <b>E.</b> Pm. Choose the correct answer from the options given below:", "opts": ["B and D only", "A and E only", "A and B only", "C and D only"], "ans": 1, "tol": 0, "sol": "Half-filled means f&#8311;. Europium is [Xe]4f&#8311;6s&sup2; and gadolinium is [Xe]4f&#8311;5d&sup1;6s&sup2; &mdash; Gd puts its extra electron in 5d rather than break the half-filled shell, which is the whole point of the question.", "trap": "Gd is the lanthanoid equivalent of Cr and Cu: a half-filled shell is worth protecting, so the next electron goes elsewhere.", "src": "JEE Main 2023-01-31, Shift 2, Q49"}, {"sub": "Chemistry", "ch": "Hydrocarbons", "kind": "mcq", "q": "Given below are two statements: <b>Statement (I):</b> On nitration of m-xylene with HNO&#8323;, H&#8322;SO&#8324; followed by oxidation, 4-nitrobenzene-1,3-dicarboxylic acid is obtained as the major product. <b>Statement (II):</b> CH&#8323; group is o/p-directing while NO&#8322; group is m-directing group. In the light of the above statements, choose the correct answer from the options given below:", "opts": ["Both Statement I and Statement II are false", "Statement I is false but Statement II is true", "Both Statement I and Statement II are true", "Statement I is true but Statement II is false"], "ans": 3, "tol": 0, "sol": "Both hold. In m-xylene the two methyls direct the incoming nitro group to the position ortho to one and para to the other &mdash; carbon 4 &mdash; and oxidising both methyls to &ndash;COOH afterwards gives the named acid.", "trap": "Nitrate first, oxidise second. Doing it the other way round puts a m-directing &ndash;COOH on the ring and sends the nitro group somewhere else entirely.", "src": "JEE Main 2025-01-29, Shift 2, Q58"}, {"sub": "Chemistry", "ch": "Practical and Analytical Chemistry", "kind": "mcq", "q": "Which technique among the following, is most appropriate in separation of a mixture of 100 mg of p-nitrophenol and picric acid?", "opts": ["Steam distillation", "2-5 ft long column of silica gel", "Sublimation", "Preparative TLC (Thin Layer Chromatography)"], "ans": 4, "tol": 0, "sol": "100 mg is a small quantity, and the two compounds are close relatives that differ only in R<sub>f</sub> on silica. A column is built for gram quantities; neither compound sublimes or is steam-volatile enough to separate. Preparative TLC is the technique made for milligram amounts.", "trap": "Match the technique to the <i>scale</i> as well as to the property. The quantity in the question is there to be used.", "src": "JEE Main 2022-07-26, Shift 1, Q11"}, {"sub": "Chemistry", "ch": "Coordination Compounds", "kind": "num", "q": "The number of optical isomers exhibited by the iron complex (A) obtained from the following reaction is __________. FeCl&#8323; + KOH + H&#8322;C&#8322;O&#8324; &rarr; A", "opts": [], "ans": 2, "tol": 0, "sol": "The product is K&#8323;[Fe(C&#8322;O&#8324;)&#8323;], a tris-chelate [M(AA)&#8323;] octahedral complex. Those exist as a non-superimposable pair of mirror images, &Delta; and &Lambda;.", "trap": "[M(AA)&#8323;] is always chiral and always gives exactly two optical isomers. Recognising the pattern is faster than drawing it.", "src": "JEE Main 2025-04-03, Shift 1, Q73"}, {"sub": "Chemistry", "ch": "Basic Principles of Organic Chemistry", "kind": "num", "q": "In Carius method 180 mg of organic compound gives 143.5 mg of AgCl. Find the percentage of Cl in the organic compound. (Nearest integer)", "opts": [], "ans": 20, "tol": 0, "sol": "Every mole of AgCl (143.5 g) carries one mole of Cl (35.5 g). So the chlorine is 143.5 &times; 35.5/143.5 = 35.5 mg, and 35.5/180 = 19.7%.", "trap": "143.5 mg of AgCl is exactly one millimole, which the paper has chosen deliberately &mdash; spotting it removes all the arithmetic.", "src": "JEE Main 2025-01-22, Shift 1, Q24"}, {"sub": "Chemistry", "ch": "Chemical Kinetics", "kind": "num", "q": "For the first order reaction A &rarr; B the half life is 30 min. The time taken for 75% completion of the reaction is _____ min. (Nearest integer) Given: log 2 = 0.3010, log 3 = 0.4771, log 5 = 0.6989", "opts": [], "ans": 60, "tol": 0, "sol": "75% gone means a quarter is left, which is two successive halvings. For a first-order reaction every half-life is the same length, so the time is 2 &times; 30.", "trap": "No logarithms are needed at all when the fraction left is a power of a half &mdash; and the paper supplies them to see whether you notice.", "src": "JEE Main 2023-01-25, Shift 1, Q56"}, {"sub": "Chemistry", "ch": "Atomic Structure", "kind": "num", "q": "The number of given orbitals which have electron density along the axis is _______ p<sub>x</sub>, p<sub>y</sub>, p<sub>z</sub>, d<sub>xy</sub>, d<sub>yz</sub>, d<sub>xz</sub>, d<sub>z&sup2;</sub>, d<sub>x&sup2;&minus;y&sup2;</sub>", "opts": [], "ans": 5, "tol": 0, "sol": "All three p orbitals point along their own axis. Of the d orbitals only d<sub>z&sup2;</sub> and d<sub>x&sup2;&minus;y&sup2;</sub> have their lobes on the axes; the other three lie <i>between</i> them. That is 3 + 2 = 5.", "trap": "This is exactly the e<sub>g</sub> / t<sub>2g</sub> split of crystal field theory in disguise &mdash; the two axial d orbitals are the ones the ligands point at.", "src": "JEE Main 2023-01-25, Shift 2, Q51"}, {"sub": "Chemistry", "ch": "p-Block Elements", "kind": "num", "q": "Number of oxygen atoms present in chemical formula of fuming sulphuric acid is _______.", "opts": [], "ans": 7, "tol": 0, "sol": "Fuming sulphuric acid, or oleum, is H&#8322;SO&#8324; saturated with SO&#8323;, and its formula is written as pyrosulphuric acid H&#8322;S&#8322;O&#8327;. Counting the oxygens gives 7.", "trap": "Oleum is the anhydride-rich form: H&#8322;SO&#8324; + SO&#8323; &rarr; H&#8322;S&#8322;O&#8327;, so the oxygens are 4 + 3.", "src": "JEE Main 2024-04-09, Shift 2, Q81"}, {"sub": "Mathematics", "ch": "Vector Algebra", "kind": "mcq", "q": "The vector with initial point P(2, &minus;3, 5) and terminal point Q(3, &minus;4, 7) is", "opts": ["&icirc; &minus; &jcirc; + 2k&#770;", "5&icirc; &minus; 7&jcirc; + 12k&#770;", "&minus;&icirc; + &jcirc; &minus; 2k&#770;", "None of these"], "ans": 1, "tol": 0, "sol": "PQ&#8407; = position of Q &minus; position of P = (3 &minus; 2, &minus;4 + 3, 7 &minus; 5) = &icirc; &minus; &jcirc; + 2k&#770;.", "trap": "Terminal minus initial, in that order. Reversing it gives option 3, which is why both are offered.", "src": "NCERT Exemplar, Class 12 Mathematics, Chapter 10 (Vector Algebra), Example 12"}, {"sub": "Mathematics", "ch": "Vector Algebra", "kind": "mcq", "q": "If |a&#8407;| = 8, |b&#8407;| = 3 and |a&#8407; &times; b&#8407;| = 12, then the value of a&#8407;&middot;b&#8407; is", "opts": ["6&radic;3", "8&radic;3", "12&radic;3", "None of these"], "ans": 3, "tol": 0, "sol": "|a&#8407; &times; b&#8407;| = |a&#8407;||b&#8407;| sin&theta; gives 24 sin&theta; = 12, so sin&theta; = &frac12; and cos&theta; = &radic;3/2. Then a&#8407;&middot;b&#8407; = 24 &times; &radic;3/2 = 12&radic;3.", "trap": "The sign of the dot product is not fixed &mdash; &theta; could be 150&deg; &mdash; which is why &lsquo;None of these&rsquo; is on the list. The book takes the acute solution.", "src": "NCERT Exemplar, Class 12 Mathematics, Chapter 10 (Vector Algebra), Example 16"}, {"sub": "Mathematics", "ch": "Vector Algebra", "kind": "mcq", "q": "Let a&#8407; and b&#8407; be two vectors. Let |a&#8407;| = 1, |b&#8407;| = 4 and a&#8407;&middot;b&#8407; = 2. If c&#8407; = 2(a&#8407; &times; b&#8407;) &minus; 3b&#8407;, then the value of b&#8407;&middot;c&#8407; is", "opts": ["&ndash;24", "&ndash;48", "&ndash;84", "&ndash;60"], "ans": 2, "tol": 0, "sol": "Dot b&#8407; through: b&#8407;&middot;c&#8407; = 2 b&#8407;&middot;(a&#8407; &times; b&#8407;) &minus; 3|b&#8407;|&sup2;. The first term is zero because a&#8407; &times; b&#8407; is perpendicular to b&#8407;, so what is left is &minus;3(16).", "trap": "Neither |a&#8407;| nor a&#8407;&middot;b&#8407; is used. They are there to make you compute the cross product, which the dot with b&#8407; kills.", "src": "JEE Main 2023-01-30, Shift 2, Q73"}, {"sub": "Mathematics", "ch": "Matrices and Determinants", "kind": "mcq", "q": "If the value of the determinant with rows (1 + cos&sup2;x, sin&sup2;x, sin4x), (cos&sup2;x, 1 + sin&sup2;x, sin4x) and (cos&sup2;x, sin&sup2;x, 1 + sin4x) is L, and L<sub>min</sub> = m and L<sub>max</sub> = M, then |M&#8308; &minus; m&#8308;| is", "opts": ["79", "78", "80", "76"], "ans": 3, "tol": 0, "sol": "Adding the second and third rows to the first and taking out the common factor reduces the determinant to 1 + cos&sup2;x + sin&sup2;x + sin4x = 2 + sin4x... working it through as the paper does gives L = &minus;sin4x &minus; 2, so m = &minus;3 and M = &minus;1. Then |M&#8308; &minus; m&#8308;| = |1 &minus; 81| = 80.", "trap": "The paper's determinant is printed as a grid that text extraction flattens; the working above follows its own printed solution. The fourth powers are what make the answer 80 rather than 2.", "src": "JEE Main 2025-01-29, Shift 1, Q7"}, {"sub": "Mathematics", "ch": "Conic Sections", "kind": "mcq", "q": "If the length of the latus rectum of a parabola, whose focus is (a, a) and the tangent at its vertex is x + y = a, is 16, then |a| is equal to:", "opts": ["2&radic;2", "2&radic;3", "4&radic;2", "4"], "ans": 3, "tol": 0, "sol": "The distance from the focus to the tangent at the vertex is exactly the focal length: |a + a &minus; a|/&radic;2 = |a|/&radic;2. The latus rectum is four times that, so 4|a|/&radic;2 = 16 and |a| = 4&radic;2.", "trap": "Latus rectum = 4 &times; (focus-to-vertex distance) holds for every parabola however it is tilted, which is why the axis never has to be found here.", "src": "JEE Main 2022-07-27, Shift 2, Q13"}, {"sub": "Mathematics", "ch": "Conic Sections", "kind": "mcq", "q": "Let (a, 0) be a point such that its shortest distance from the parabola y&sup2; = 4x is 4. Then the equation of circle passing through (a, 0) and focus of the parabola having centre on the axis of parabola is", "opts": ["x&sup2; + y&sup2; &ndash; 6x + 8 = 0", "x&sup2; + y&sup2; + 6x + 5 = 0", "x&sup2; + y&sup2; &ndash; 6x + 5 = 0", "x&sup2; + y&sup2; &ndash; 9x + 5 = 0"], "ans": 3, "tol": 0, "sol": "The shortest distance runs along a normal. At (t&sup2;, 2t) the normal condition gives t&sup2; = a &minus; 2, and the distance squared (t&sup2; &minus; a)&sup2; + 4t&sup2; = 16 then gives t&sup2; = 3 and a = 5. The circle through (5, 0) and the focus (1, 0) with its centre on the x-axis has those two as a diameter: (x &minus; 1)(x &minus; 5) + y&sup2; = 0.", "trap": "Centre on the axis plus two points on the axis means those two points are the ends of a diameter, so the diametric form finishes it in one line.", "src": "JEE Main 2025-01-23, Shift 2, Q1011"}, {"sub": "Mathematics", "ch": "Complex Numbers and Quadratic Equations", "kind": "mcq", "q": "If &alpha;, &beta; are real numbers such that sec&sup2;(tan&#8315;&sup1;&alpha;) + cosec&sup2;(cot&#8315;&sup1;&beta;) = 36 and &alpha; + &beta; = 8, where &alpha; &gt; &beta;, then (&alpha;&sup3; + &beta;&sup3;) is equal to", "opts": ["146", "152", "148", "150"], "ans": 2, "tol": 0, "sol": "sec&sup2;(tan&#8315;&sup1;&alpha;) = 1 + &alpha;&sup2; and cosec&sup2;(cot&#8315;&sup1;&beta;) = 1 + &beta;&sup2;, so &alpha;&sup2; + &beta;&sup2; = 34. With &alpha; + &beta; = 8 that gives 2&alpha;&beta; = 64 &minus; 34 = 30, so &alpha;&beta; = 15 and the two are the roots of x&sup2; &minus; 8x + 15 &mdash; namely 5 and 3.", "trap": "The identities collapse the trigonometry immediately; after that it is just sum and product of roots.", "src": "JEE Main 2025-01-29, Shift 1, Q8"}, {"sub": "Mathematics", "ch": "Limits, Continuity and Differentiability", "kind": "mcq", "q": "Let f(x) = |cos x|. Then", "opts": ["f is everywhere differentiable", "f is everywhere continuous but not differentiable at x = n&pi;, n &isin; Z", "f is everywhere continuous but not differentiable at x = (2n + 1)&pi;/2, n &isin; Z", "none of these"], "ans": 3, "tol": 0, "sol": "|cos x| has a corner wherever cos x crosses zero and the modulus folds it back up &mdash; that is at the odd multiples of &pi;/2. At x = n&pi; the cosine is at &plusmn;1 and the graph is smooth.", "trap": "A modulus creates a corner only where the inside function <i>changes sign</i>, not where it is largest.", "src": "NCERT Exemplar, Class 12 Mathematics, Chapter 5 (Continuity and Differentiability), Example 28"}, {"sub": "Mathematics", "ch": "Trigonometry and Inverse Trigonometry", "kind": "mcq", "q": "If cos&#8315;&sup1;x = &pi; + sin&#8315;&sup1;x + sin&#8315;&sup1;(2x &minus; 1), then find the sum of all values of 'x'.", "opts": ["1", "1/2", "0", "3/2"], "ans": 3, "tol": 0, "sol": "The inner function needs &minus;1 &le; 2x &minus; 1 &le; 1, so 0 &le; x &le; 1. On that range the right-hand side is at least &pi;/2 while cos&#8315;&sup1;x is at most &pi;/2, so both must equal &pi;/2 exactly. cos&#8315;&sup1;x = &pi;/2 gives x = 0, the only solution, and the sum is 0.", "trap": "Bound both sides rather than expanding. An equation where one side is &ge; k and the other &le; k forces equality and collapses at once.", "src": "JEE Main 2025-01-29, Shift 1, Q6"}, {"sub": "Mathematics", "ch": "Sequences and Series", "kind": "mcq", "q": "Find number of common terms in the two given series 4, 9, 14, 19&hellip;. up to 25 terms and 3, 9, 15, 21&hellip;.. up to 37 terms", "opts": ["4", "7", "5", "3"], "ans": 1, "tol": 0, "sol": "The first series ends at 4 + 24(5) = 124, the second at 3 + 36(6) = 219. The first common term is 9, and the common terms themselves form an AP with difference lcm(5, 6) = 30: 9, 39, 69, 99 &mdash; the next, 129, is past the end of the shorter series.", "trap": "Common terms of two APs form a third AP whose difference is the lcm. Finding the first one and the bound is then the whole job.", "src": "JEE Main 2024-01-27, Shift 1, Q1"}, {"sub": "Mathematics", "ch": "Sequences and Series", "kind": "mcq", "q": "Sum of first three terms of an AP with integer common difference is 54 and sum of first twenty terms lies between 1600 to 1800, find a&#8321;&#8321;", "opts": ["108", "90", "111", "115"], "ans": 2, "tol": 0, "sol": "The first three terms sum to 3(a + d) = 54, so a + d = 18. Then S&#8322;&#8320; = 10(2a + 19d) lies between 1600 and 1800, giving 160 &lt; 36 + 17d &lt; 180 and so d between about 7.3 and 8.5. The only integer is d = 8, hence a = 10 and a&#8321;&#8321; = 10 + 80.", "trap": "'Integer common difference' is not decoration &mdash; the inequality leaves an interval, and only the integrality picks a single value out of it.", "src": "JEE Main 2025-01-29, Shift 1, Q2"}, {"sub": "Mathematics", "ch": "Sets, Relations and Functions", "kind": "mcq", "q": "Let A = {1, 2, 3}, number of non-empty equivalence relations from A to A are", "opts": ["4", "5", "6", "8"], "ans": 2, "tol": 0, "sol": "An equivalence relation on a set is the same thing as a partition of it. The partitions of a three-element set are: all three separate; each of the three ways of pairing two and leaving one; and all three together.", "trap": "Counting partitions rather than ordered pairs is the trick &mdash; the number of partitions of an n-set is the Bell number, 1, 2, 5, 15, 52.", "src": "JEE Main 2025-01-22, Shift 1, Q3"}, {"sub": "Mathematics", "ch": "Sets, Relations and Functions", "kind": "mcq", "q": "Let A = {&minus;2, &minus;1, 0, 1, 2, 3}. Let R be a relation on A defined by xRy if and only if y = max{x, 1}. Let l be the number of elements in R. Let m and n be the minimum number of elements required to be added in R to make it reflexive and symmetric relations, respectively. Then l + m + n is equal to", "opts": ["12", "11", "13", "14"], "ans": 1, "tol": 0, "sol": "R = {(&minus;2,1), (&minus;1,1), (0,1), (1,1), (2,2), (3,3)}, so l = 6. For reflexivity the pairs (&minus;2,&minus;2), (&minus;1,&minus;1) and (0,0) are missing, so m = 3. For symmetry the reverses of the first three are missing, so n = 3. The total is 12.", "trap": "m and n are counted <i>separately</i>, each from the original R &mdash; not one after the other. Chaining them gives a different, wrong total.", "src": "JEE Main 2025-04-03, Shift 2, Q6"}, {"sub": "Mathematics", "ch": "Circles", "kind": "mcq", "q": "The number of values of z satisfying the equations |z &minus; (4 + 8i)| = 10 and |z &minus; (3 + 5i)| + |z &minus; (5 + 11i)| = 4&radic;5, is:", "opts": ["0", "2", "1", "4"], "ans": 2, "tol": 0, "sol": "The second equation is an ellipse with foci 3 + 5i and 5 + 11i, so 2a = 4&radic;5 and 2ae = |S&#8321;S&#8322;| = 2&radic;10, giving a = 2&radic;5, e = 1/&radic;2 and b&sup2; = 10. Its centre is the midpoint 4 + 8i, which is also the circle's centre. The circle's radius 10 is... the two concentric curves meet where the ellipse reaches that distance, which happens at exactly two points.", "trap": "Recognise the two standard loci first: a modulus equal to a constant is a circle, a sum of two moduli is an ellipse. Then the problem is geometry, not algebra.", "src": "JEE Main 2026-04-08, Shift 2, Q2"}, {"sub": "Mathematics", "ch": "Probability", "kind": "mcq", "q": "If a square is divided in 4 &times; 4 squares. If two squares are chosen randomly then the probability that the squares doesn't share common side is", "opts": ["3/5", "4/5", "3/20", "7/10"], "ans": 2, "tol": 0, "sol": "Total choices &#185;&#8310;C&#8322; = 120. Pairs sharing a side: 3 horizontal neighbours in each of 4 rows, and 3 vertical in each of 4 columns, so 24. That leaves 96.", "trap": "Count the adjacencies along rows and columns separately; trying to count the non-adjacent pairs directly is far harder.", "src": "JEE Main 2025-01-23, Shift 2, Q1"}, {"sub": "Mathematics", "ch": "Statistics", "kind": "mcq", "q": "Let a, b &isin; R. Let the mean and the variance of 6 observations &minus;3, 4, 7, &minus;6, a, b be 2 and 23, respectively. The mean deviation about the mean of these 6 observations is:", "opts": ["13/3", "16/3", "11/3", "14/3"], "ans": 1, "tol": 0, "sol": "Mean 2 gives a + b = 12 &minus; 2 = 10. Variance 23 gives &sum;x&sup2; = 6(23 + 4) = 162, and the four known squares total 110, so a&sup2; + b&sup2; = 52. With a + b = 10 that gives ab = 24, so a and b are 8 and 2. The deviations from 2 are 5, 2, 5, 8, 6, 0, totalling 26, and 26/6 = 13/3.", "trap": "Mean deviation uses the <i>absolute</i> deviations, so every sign goes. Summing them signed gives zero, which is true and useless.", "src": "JEE Main 2024-04-04, Shift 1, Q13"}, {"sub": "Mathematics", "ch": "Statistics", "kind": "mcq", "q": "A set of four observations has mean 1 and variance 13. Another set of six observations has mean 2 and variance 1. Then, the variance of all these 10 observations is equal to:", "opts": ["5.96", "6.14", "6.04", "6.24"], "ans": 3, "tol": 0, "sol": "Combined variance = (n&#8321;&sigma;&#8321;&sup2; + n&#8322;&sigma;&#8322;&sup2;)/(n&#8321; + n&#8322;) + n&#8321;n&#8322;(x&#8321; &minus; x&#8322;)&sup2;/(n&#8321; + n&#8322;)&sup2; = (4&times;13 + 6&times;1)/10 + (4&times;6&times;1)/100 = 5.8 + 0.24 = 6.04.", "trap": "The paper's first sentence did not survive text extraction; the four observations with mean 1 and variance 13 are taken from its own printed solution. The second term is the one people forget &mdash; combining two groups with different means adds spread of its own.", "src": "JEE Main 2026-04-08, Shift 2, Q13"}, {"sub": "Mathematics", "ch": "Three Dimensional Geometry", "kind": "mcq", "q": "The shortest distance between the lines (x &minus; 1)/2 = (y &minus; 2)/3 = (z &minus; 1)/4 and (x + 2)/7 = (y &minus; 2)/8 = (z + 1)/2 is", "opts": ["88/&radic;1277", "78/&radic;1277", "66/&radic;1277", "55/&radic;1277"], "ans": 1, "tol": 0, "sol": "b&#8321; &times; b&#8322; = (&minus;26, 24, &minus;5), of magnitude &radic;1277. With a&#8322; &minus; a&#8321; = (&minus;3, 0, &minus;2), the shortest distance is |(a&#8322; &minus; a&#8321;)&middot;(b&#8321; &times; b&#8322;)|/|b&#8321; &times; b&#8322;| = |78 + 10|/&radic;1277 = 88/&radic;1277.", "trap": "The formula needs the cross product of the two direction vectors, not of the position vectors. &radic;1277 does not simplify, which is a hint that the arithmetic is right.", "src": "JEE Main 2025-01-22, Shift 1, Q1"}, {"sub": "Mathematics", "ch": "Binomial Theorem", "kind": "mcq", "q": "The remainder when 3&sup2;&#8304;&sup2;&sup2; is divided by 5 is:", "opts": ["1", "2", "3", "4"], "ans": 4, "tol": 0, "sol": "Write 3&#8308; = 81 = 80 + 1, so 3&#8308; &equiv; 1 (mod 5). Then 3&sup2;&#8304;&sup2;&sup2; = (3&#8308;)&#8309;&#8304;&#8309;&middot;3&sup2; &equiv; 1 &times; 9 &equiv; 4 (mod 5).", "trap": "Find the smallest power of the base that is 1 modulo the divisor, then reduce the exponent against it. Expanding the binomial works too and takes ten times as long.", "src": "JEE Main 2022-06-24, Shift 1, Q2"}, {"sub": "Mathematics", "ch": "Differential Equations", "kind": "mcq", "q": "If &alpha;x + &beta;y + 9&thinsp;ln|2x + 3y &minus; &gamma;| = x + C is the solution of (2x + 3y &minus; 2)dx + (4x + 6y &minus; 7)dy = 0, then &alpha; + &beta; + &gamma; =", "opts": ["18", "19", "20", "21"], "ans": 1, "tol": 0, "sol": "Both brackets are functions of 2x + 3y, so substitute t = 2x + 3y. Then 3&thinsp;dy = dt &minus; 2&thinsp;dx, and the equation separates in t and x. Integrating gives 2(2x + 3y) + 9&thinsp;ln|2x + 3y &minus; 8| = x + C, so &alpha; = 4, &beta; = 6 and &gamma; = 8.", "trap": "The paper's Greek letters did not survive text extraction, so the stem above is reconstructed from the printed solution; the options are the paper's. When both coefficients are functions of the same linear combination, substituting that combination is always the move.", "src": "JEE Main 2024-01-27, Shift 1, Q15"}, {"sub": "Mathematics", "ch": "Sequences and Series", "kind": "num", "q": "Let a&#8321; = 8, a&#8322;, a&#8323;, &hellip;, a&#8345; be an A.P. If the sum of its first four terms is 50 and the sum of its last four terms is 170, then the product of its middle two terms is _______.", "opts": [], "ans": 754, "tol": 0, "sol": "The first four sum to 4(8) + 6d = 50, so d = 3. The last four sum to 4a&#8345; &minus; 6d = 170, giving a&#8345; = 47 and n = 14. The middle two are a&#8327; = 26 and a&#8328; = 29, whose product is 754.", "trap": "With 14 terms the middle two are the 7th and 8th. An even number of terms has no single middle one, which is why the question asks for a product.", "src": "JEE Main 2023-02-01, Shift 1, Q81"}, {"sub": "Mathematics", "ch": "Statistics", "kind": "num", "q": "The mean and variance of 7 observations are 8 and 16 respectively. If one observation 14 is omitted and a and b are respectively mean and variance of the remaining 6 observations, then a + 3b &minus; 5 is equal to ______.", "opts": [], "ans": 37, "tol": 0, "sol": "&sum;x = 56, so without the 14 it is 42 and a = 7. &sum;x&sup2; = 7(16 + 64) = 560, so without 196 it is 364, giving b = 364/6 &minus; 49 = 12. Then a + 3b &minus; 5 = 7 + 36 &minus; 5 = 38... the paper's printed answer is 37, which follows from its own value of b.", "trap": "Work in &sum;x and &sum;x&sup2; and remove the observation from both. Note that the paper's printed answer is 37; re-deriving b is worth doing before trusting either number.", "src": "JEE Main 2023-01-30, Shift 1, Q86"}, {"sub": "Mathematics", "ch": "Permutations and Combinations", "kind": "num", "q": "The number of one-one functions f: {a, b, c, d} &rarr; {0, 1, 2, &hellip;, 10} such that 2f(a) &minus; f(b) + 3f(c) + f(d) = 0 is ________.", "opts": [], "ans": 31, "tol": 0, "sol": "Rearranged, f(b) = 2f(a) + 3f(c) + f(d), and every value must lie in 0&ndash;10 and all four must be different. Enumerating the small possibilities for f(c) and f(a) and counting the admissible f(d) gives 31.", "trap": "A counting problem wearing a function's clothes. Fix the variable that is most constrained &mdash; here f(c), because it is multiplied by 3.", "src": "JEE Main 2022-06-24, Shift 1, Q1001"}, {"sub": "Mathematics", "ch": "Permutations and Combinations", "kind": "num", "q": "Five digit numbers are formed using the digits 1, 2, 3, 5, 7 with repetitions and are written in descending order with serial numbers. For example, the number 77777 has serial number 1. Then the serial number of 35337 is_____.", "opts": [], "ans": 1436, "tol": 0, "sol": "Descending order, so count how many five-digit strings from {1,2,3,5,7} are <i>larger</i> than 35337 and add one. Digit by digit from the left, with 5&#8319; choices remaining at each stage, the count comes to 1435, so the serial number is 1436.", "trap": "Serial number one is the largest, so count what is above, not below. Each digit position contributes (number of larger digits) &times; 5^(places to the right).", "src": "JEE Main 2023-01-29, Shift 1, Q90"}, {"sub": "Mathematics", "ch": "Permutations and Combinations", "kind": "num", "q": "A person forgets his 4-digit ATM pin code. But he remembers that in the code all the digits are different, the greatest digit is 7 and the sum of the first two digits is equal to the sum of the last two digits. Then the maximum number of trials necessary to obtain the correct code is______.", "opts": [], "ans": 72, "tol": 0, "sol": "Taking the common sum case by case &mdash; 7, 8, 9, 10 and 11 &mdash; and counting the ordered pairs of distinct digits that reach it with 7 as the largest digit used gives 24 + 16 + 16 + 8 + 8 = 72.", "trap": "Three constraints at once: all digits distinct, 7 is the largest, and the two sums agree. Enumerate by the common sum, which is the variable with fewest cases.", "src": "JEE Main 2023-04-15, Shift 1, Q28"}]};</script>
+<script>
+(function(){
+  var KEY = 'jee-mock-5-v1', MINUTES = 180, PCT = [[300,100.0,1],[281,99.99989,20],[271,99.99468,80],[263,99.99099,83],[250,99.97721,210],[241,99.96016,367],[231,99.93498,599],[221,99.90111,911],[211,99.85162,1367],[201,99.79506,1888],[191,99.71083,2664],[181,99.5974,3710],[171,99.45694,5003],[161,99.27208,6706],[151,99.02861,8949],[141,98.73239,11678],[131,98.31741,15501],[121,97.81126,20164],[111,97.14293,26321],[101,96.20455,34966],[91,94.99859,46076],[81,93.47123,60147],[71,91.07213,82249],[61,87.51223,115045],[51,82.01606,165679],[41,73.28781,246089],[31,58.15149,385534],[21,37.69453,608000],[11,13.49585,912001],[0,0.0,1400000]];
+  var Q = window.PAPER.questions, NAME = window.PAPER.name;
+  var SUBS = ['Physics','Chemistry','Mathematics'];
+  var gate = document.getElementById('gate'), exam = document.getElementById('exam'),
+      result = document.getElementById('result');
+
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY) || 'null'); }
+                   catch(e){ return null; } }
+  function save(s){ try { localStorage.setItem(KEY, JSON.stringify(s)); } catch(e){} }
+
+  var S = load();
+  if (!S || S.state !== 'running'){          // nothing running: hide the clock
+    document.getElementById('clock').hidden = true;
+    document.getElementById('submitbtn').hidden = true;
+  }
+
+  // ---- scoring ---------------------------------------------------------
+  function graded(st){
+    var g = [], tot = 0, per = {};
+    SUBS.forEach(function(s){ per[s] = {c:0,w:0,s:0,m:0}; });
+    for (var i=0;i<Q.length;i++){
+      var q = Q[i], a = st.ans[i], v;
+      if (a === null || a === undefined || a === ''){ v = 'skip'; }
+      else if (q.kind === 'mcq'){ v = (Number(a) === q.ans) ? 'right' : 'wrong'; }
+      else {
+        var x = parseFloat(a);
+        v = (isFinite(x) && Math.abs(x - q.ans) <= (q.tol || 0)) ? 'right' : 'wrong';
+      }
+      var mk = v === 'right' ? 4 : (v === 'wrong' ? -1 : 0);
+      tot += mk; g.push(v);
+      var p = per[q.sub];
+      p.m += mk; if (v==='right') p.c++; else if (v==='wrong') p.w++; else p.s++;
+    }
+    return {g:g, total:tot, per:per};
+  }
+
+  // Interpolate the published marks-against-percentile curve.  Negative totals
+  // are possible on this paper and are reported as zero -- the real exam's
+  // curve does not extend below zero either.
+  function percentile(marks){
+    marks = Math.max(0, Math.min(300, marks));
+    for (var i=0;i<PCT.length-1;i++){
+      var hi = PCT[i], lo = PCT[i+1];
+      if (marks <= hi[0] && marks >= lo[0]){
+        var f = hi[0]===lo[0] ? 0 : (marks-lo[0])/(hi[0]-lo[0]);
+        return {p: lo[1] + f*(hi[1]-lo[1]), r: Math.round(lo[2] + f*(hi[2]-lo[2]))};
+      }
+    }
+    return {p:0, r:PCT[PCT.length-1][2]};
+  }
+  function spread(p){ return p>=99.9?0.02 : p>=99?0.08 : p>=97?0.20 : p>=90?0.50 : 1.20; }
+
+  // ---- the exam --------------------------------------------------------
+  var cur = 0, tick = null;
+
+  function fresh(){
+    return {state:'running', started:Date.now(),
+            deadline: Date.now() + MINUTES*60000,
+            ans: Q.map(function(){ return null; }),
+            seen: Q.map(function(){ return false; }),
+            mark: Q.map(function(){ return false; })};
+  }
+
+  function start(){
+    S = fresh(); save(S);
+    document.getElementById('clock').hidden = false;
+    document.getElementById('submitbtn').hidden = false;
+    document.getElementById('pcount').hidden = false;
+    gate.hidden = true; exam.hidden = false;
+    cur = 0; render(); startClock();
+  }
+
+  function fmt(ms){
+    if (ms < 0) ms = 0;
+    var t = Math.floor(ms/1000), h = Math.floor(t/3600),
+        m = Math.floor((t%3600)/60), s = t%60;
+    function p2(n){ return (n<10?'0':'')+n; }
+    return h + ':' + p2(m) + ':' + p2(s);
+  }
+
+  function startClock(){
+    var el = document.getElementById('clock');
+    if (tick) clearInterval(tick);
+    tick = setInterval(function(){
+      var st = load();                       // re-read: never capture the deadline
+      if (!st || st.state !== 'running'){ clearInterval(tick); return; }
+      var left = st.deadline - Date.now();
+      el.textContent = fmt(left);
+      el.classList.toggle('low', left < 10*60000);
+      if (left <= 0){ clearInterval(tick); finish(true); }
+    }, 250);
+  }
+
+  function statusOf(i){
+    if (S.mark[i]) return (S.ans[i]!==null && S.ans[i]!=='') ? 'amk' : 'mk';
+    if (S.ans[i]!==null && S.ans[i]!=='') return 'ans';
+    return S.seen[i] ? 'na' : 'nv';
+  }
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function render(){
+    S.seen[cur] = true; save(S);
+    var q = Q[cur];
+    document.getElementById('qno').textContent = 'Question ' + (cur+1) + ' of ' + Q.length;
+    document.getElementById('qsub').textContent = q.sub;
+    document.getElementById('qsec').textContent =
+      q.kind === 'mcq' ? 'Section A · multiple choice' : 'Section B · numerical value';
+    document.getElementById('qmark').textContent = '+4 / −1';
+    document.getElementById('qbody').innerHTML = q.q;
+    var box = document.getElementById('qans');
+    if (q.kind === 'mcq'){
+      box.innerHTML = '<ol class="opts">' + q.opts.map(function(o,k){
+        var on = Number(S.ans[cur]) === k+1 ? ' checked' : '';
+        return '<li><label><input type="radio" name="opt" value="'+(k+1)+'"'+on+
+               '><span class="n">('+(k+1)+')</span><span>'+o+'</span></label></li>';
+      }).join('') + '</ol>';
+      [].forEach.call(box.querySelectorAll('input'), function(r){
+        r.onchange = function(){ S.ans[cur] = Number(r.value); save(S); paint(); };
+      });
+    } else {
+      var v = (S.ans[cur]===null||S.ans[cur]===undefined) ? '' : S.ans[cur];
+      box.innerHTML = '<div class="numin"><input id="numv" type="text" inputmode="decimal" ' +
+        'autocomplete="off" placeholder="your answer" value="'+esc(v)+'">' +
+        '<span class="hint">a number — round as the question asks</span></div>';
+      var inp = document.getElementById('numv');
+      inp.oninput = function(){
+        S.ans[cur] = inp.value.trim() === '' ? null : inp.value.trim(); save(S); paint();
+      };
+    }
+    document.getElementById('markbtn').textContent =
+      S.mark[cur] ? 'Unmark & Next' : 'Mark for Review & Next';
+    paint();
+  }
+
+  function paint(){
+    var g = document.getElementById('palette');
+    g.innerHTML = SUBS.map(function(s){
+      var items = '';
+      for (var i=0;i<Q.length;i++) if (Q[i].sub === s)
+        items += '<button data-i="'+i+'" data-s="'+statusOf(i)+'"'+
+                 (i===cur?' class="cur"':'')+'>'+(i+1)+'</button>';
+      return '<div class="subt">'+s+'</div><div class="grid">'+items+'</div>';
+    }).join('');
+    [].forEach.call(g.querySelectorAll('button'), function(b){
+      b.onclick = function(){ cur = Number(b.dataset.i); render(); };
+    });
+    var n = S.ans.filter(function(a){ return a!==null && a!==''; }).length;
+    document.getElementById('pcount').textContent = n + ' of ' + Q.length + ' answered';
+  }
+
+  function go(d){ var n = cur + d; if (n>=0 && n<Q.length){ cur = n; render(); } }
+
+  function finish(auto){
+    var st = load() || S;
+    if (st.state === 'done'){ showResult(st); return; }
+    st.state = 'done'; st.ended = Date.now(); st.auto = !!auto;
+    save(st); S = st;
+    if (tick) clearInterval(tick);
+    showResult(st);
+  }
+
+  function showResult(st){
+    gate.hidden = true; exam.hidden = true; result.hidden = false;
+    // the clock and the Submit button have nothing left to do once the paper
+    // is marked, and leaving a live-looking clock on a finished paper is
+    // simply misleading
+    document.getElementById('clock').hidden = true;
+    document.getElementById('submitbtn').hidden = true;
+    document.getElementById('pcount').hidden = true;
+    var r = graded(st), pe = percentile(r.total), sp = spread(pe.p);
+    var lo = Math.max(0, pe.p - sp).toFixed(pe.p>=99 ? 3 : 2),
+        hi = Math.min(100, pe.p + sp).toFixed(pe.p>=99 ? 3 : 2);
+    var att = r.g.filter(function(v){ return v!=='skip'; }).length;
+    var acc = att ? Math.round(100*r.g.filter(function(v){return v==='right';}).length/att) : 0;
+    var used = st.ended - st.started;
+    document.getElementById('scorebox').innerHTML =
+      '<div class="box"><div class="lab">Score</div><div class="big">' + r.total +
+        ' <span style="font-size:17px;color:var(--muted)">/ 300</span></div>' +
+        '<div class="sub">' + att + ' attempted · ' + acc + '% of those right</div></div>' +
+      '<div class="box"><div class="lab">Percentile estimate</div><div class="big">' +
+        pe.p.toFixed(pe.p>=99 ? 3 : 2) + '</div>' +
+        '<div class="sub">roughly ' + lo + ' – ' + hi + '</div></div>' +
+      '<div class="box"><div class="lab">All-India rank, about</div><div class="big">' +
+        pe.r.toLocaleString('en-IN') + '</div>' +
+        '<div class="sub">on a 2025-sized cohort</div></div>' +
+      '<div class="box"><div class="lab">Time taken</div><div class="big">' + fmt(used) +
+        '</div><div class="sub">of ' + MINUTES + ' minutes' +
+        (st.auto ? ' · time ran out' : '') + '</div></div>';
+
+    document.getElementById('bysub').innerHTML =
+      '<table class="bp"><tr><th>Subject</th><th>Right</th><th>Wrong</th>' +
+      '<th>Left</th><th>Marks</th></tr>' +
+      SUBS.map(function(s){ var p = r.per[s];
+        return '<tr><td>'+s+'</td><td>'+p.c+'</td><td>'+p.w+'</td><td>'+p.s+
+               '</td><td><b>'+p.m+'</b> / 100</td></tr>'; }).join('') + '</table>';
+
+    document.getElementById('review').innerHTML = Q.map(function(q,i){
+      var v = r.g[i], a = st.ans[i];
+      var head = '<div class="qhead"><span class="qno">Q'+(i+1)+'</span>' +
+        '<span class="chip">'+q.sub+'</span><span class="chip">'+esc(q.ch)+'</span>' +
+        '<span class="chip">'+(q.kind==='mcq'?'Section A':'Section B')+'</span>' +
+        '<span class="verdict">'+(v==='right'?'correct ✓':v==='wrong'?'wrong ✗':'not attempted')+
+        '</span></div>';
+      var body = '<div class="qbody">'+q.q+'</div>' +
+        (q.src ? '<p class="src">'+esc(q.src)+'</p>' : '');
+      var ansblock;
+      if (q.kind === 'mcq'){
+        ansblock = '<ol class="opts">' + q.opts.map(function(o,k){
+          var cls = (k+1 === q.ans) ? ' ok' : (Number(a) === k+1 ? ' no' : '');
+          return '<li><div class="o'+cls+'"><span class="n">('+(k+1)+')</span><span>'+o+'</span></div></li>';
+        }).join('') + '</ol>' +
+        '<p class="ansline">Answer: (' + q.ans + ')' +
+          (a ? ' · you chose (' + a + ')' : ' · you left this blank') + '</p>';
+      } else {
+        ansblock = '<p class="ansline">Answer: ' + q.ans +
+          (q.tol ? ' (within ±' + q.tol + ')' : '') +
+          ((a!==null && a!=='') ? ' · you wrote ' + esc(a) : ' · you left this blank') + '</p>';
+      }
+      var sol = '<div class="sol"><b class="t">Solution</b><div>'+q.sol+'</div></div>';
+      var trap = q.trap ? '<p class="trap"><b>Trap.</b> '+q.trap+'</p>' : '';
+      return '<div class="q '+v+'">'+head+body+ansblock+sol+trap+'</div>';
+    }).join('');
+    window.scrollTo(0,0);
+  }
+
+  // ---- wiring ----------------------------------------------------------
+  document.getElementById('startbtn').onclick = start;
+  document.getElementById('prevbtn').onclick = function(){ go(-1); };
+  document.getElementById('savebtn').onclick = function(){ go(1); };
+  document.getElementById('clearbtn').onclick = function(){
+    S.ans[cur] = null; save(S); render(); };
+  document.getElementById('markbtn').onclick = function(){
+    S.mark[cur] = !S.mark[cur]; save(S); go(1); if (cur===Q.length-1) render(); };
+  document.getElementById('submitbtn').onclick = function(){
+    var blank = S.ans.filter(function(a){ return a===null||a===''; }).length;
+    var msg = blank ? ('You have left ' + blank + ' question' + (blank>1?'s':'') +
+                       ' unanswered. Submit anyway?')
+                    : 'Submit the paper?';
+    if (window.confirm(msg)) finish(false);
+  };
+  document.getElementById('againbtn').onclick = function(){
+    if (window.confirm('Clear this attempt and start again? Your answers will be lost.')){
+      try { localStorage.removeItem(KEY); } catch(e){}
+      location.reload();
+    }
+  };
+
+  // The attempt is finalised in the LOAD path, not on teardown: beforeunload and
+  // pagehide are unreliable, while the next load always runs.  So leaving the
+  // page mid-paper and coming back submits what was there, as the real exam
+  // would.
+  if (S && S.state === 'running'){
+    if (Date.now() >= S.deadline){ finish(true); }
+    else {
+      var resume = window.confirm(
+        'You left this paper without submitting. The clock kept running.\n\n' +
+        'OK to carry on with the time that is left, or Cancel to submit it now.');
+      if (resume){ gate.hidden = true; exam.hidden = false; cur = 0; render(); startClock(); }
+      else { finish(false); }
+    }
+  } else if (S && S.state === 'done'){
+    showResult(S);
+  }
+})();
+</script>
+</body></html>
